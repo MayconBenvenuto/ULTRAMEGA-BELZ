@@ -24,7 +24,7 @@ function AppContent() {
       transition={{ duration: 0.5 }}
     >
       <div className="header">
-        <h1>🏢 Dashboard Comparativo de Seguros</h1>
+        <h1>ULTRAMEGA - BELZ SEGUROS</h1>
         <p>Análise detalhada das propostas da Belz Corretora de Seguros</p>
         <ThemeToggle />
       </div>

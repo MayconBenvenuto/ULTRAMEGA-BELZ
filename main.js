@@ -46,7 +46,7 @@ async function loadSpreadsheetData() {
         console.error('Erro ao carregar dados:', error);
         return {
             saudeData: [
-                { tipo: 'atual', seguradora: 'SulAmérica', valor: 'R$ 50.000,00' },
+                { tipo: 'atual', seguradora: 'SulAmérica/Hapvida', valor: 'R$ 50.000,00' },
                 { tipo: 'novo', seguradora: 'Unimed/Bradesco', valor: 'R$ 45.000,00' }
             ],
             vidaData: [
@@ -64,9 +64,9 @@ async function loadSpreadsheetData() {
 function updateInterface(data) {
     // Dados de Saúde (usando valores estimados)
     const saudeAtual = 59214.13;
-    const saudeNovo = 47100.53;
+    const saudeNovo = 46100.53; // Atualizado para 46.100,53
     const saudeEconomia = saudeAtual - saudeNovo;
-    document.getElementById('saude-seguradora-atual').textContent = 'SulAmérica';
+    document.getElementById('saude-seguradora-atual').textContent = 'SulAmérica/Hapvida'; // Atualizado para SulAmérica/Hapvida
     document.getElementById('saude-apolice-atual').textContent = 'Apólice SulAmérica';
     document.getElementById('saude-valor-atual').textContent = formatCurrency(saudeAtual);
     document.getElementById('saude-seguradora-nova').textContent = 'Unimed/Bradesco';
