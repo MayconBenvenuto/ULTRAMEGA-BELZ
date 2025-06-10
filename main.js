@@ -26,10 +26,6 @@ function parseCSV(text) {
     }
     return result;
 }
-function parseMonetaryValue(str) {
-    if (!str) return 0;
-    return parseFloat(str.replace(/[R$\s.,]/g, '').replace(/(\d{2})$/, '.$1')) || 0;
-}
 async function loadSpreadsheetData() {
     try {
         const responses = await Promise.all([
