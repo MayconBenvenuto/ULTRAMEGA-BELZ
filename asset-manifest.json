@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/ULTRAMEGA-BELZ/static/css/main.a7c3523f.css",
-    "main.js": "/ULTRAMEGA-BELZ/static/js/main.a674accd.js",
+    "main.js": "/ULTRAMEGA-BELZ/static/js/main.a7039785.js",
     "workbox-a9b69da8.js.map": "/ULTRAMEGA-BELZ/workbox-a9b69da8.js.map",
     "workbox-a9b69da8.js": "/ULTRAMEGA-BELZ/workbox-a9b69da8.js",
     "service-worker.js.map": "/ULTRAMEGA-BELZ/service-worker.js.map",
     "service-worker.js": "/ULTRAMEGA-BELZ/service-worker.js",
     "index.html": "/ULTRAMEGA-BELZ/index.html",
     "main.a7c3523f.css.map": "/ULTRAMEGA-BELZ/static/css/main.a7c3523f.css.map",
-    "main.a674accd.js.map": "/ULTRAMEGA-BELZ/static/js/main.a674accd.js.map"
+    "main.a7039785.js.map": "/ULTRAMEGA-BELZ/static/js/main.a7039785.js.map"
   },
   "entrypoints": [
     "static/css/main.a7c3523f.css",
-    "static/js/main.a674accd.js"
+    "static/js/main.a7039785.js"
   ]
 }
