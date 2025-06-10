@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Comparativo de Seguros - Belz Corretora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Dashboard Comparativo de Seguros</h1>
+            <p>Análise detalhada das propostas da Belz Corretora de Seguros</p>
+        </div>
+        <div class="dashboard">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Carregando dados das planilhas...</p>
+            </div>
+            <div id="content" style="display: none;">
+                <!-- Seção Saúde -->
+                <div class="section saude">
+                    <h2 class="section-title">Seguro Saúde</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <div class="card-title">📋 Situação Atual</div>
+                            <div>Seguradora: <strong id="saude-seguradora-atual">Carregando...</strong></div>
+                            <div>Apólice: <strong id="saude-apolice-atual">Carregando...</strong></div>
+                            <div class="value-display value-atual" id="saude-valor-atual">R$ 0,00</div>
+                        </div>
+                        <div class="comparison-card">
+                            <div class="card-title">✨ Nova Proposta Belz</div>
+                            <div>Seguradora: <strong id="saude-seguradora-nova">Carregando...</strong></div>
+                            <div>Apólice: <strong id="saude-apolice-nova">Carregando...</strong></div>
+                            <div class="value-display value-novo" id="saude-valor-novo">R$ 0,00</div>
+                        </div>
+                    </div>
+                    <div class="difference" id="saude-diferenca">
+                        Economia: R$ 0,00
+                    </div>
+                </div>
+                <!-- Seção Vida -->
+                <div class="section vida">
+                    <h2 class="section-title">Seguro de Vida</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <div class="card-title">👥 Opção 1 - 63 Colaboradores</div>
+                            <div class="value-display value-novo">R$ 1.668,00</div>
+                            <div>Valor por colaborador: <strong id="vida-unitario-1">R$ 26,48</strong></div>
+                        </div>
+                        <div class="comparison-card">
+                            <div class="card-title">👥 Opção 2 - 148 Colaboradores</div>
+                            <div class="value-display value-novo">R$ 4.142,79</div>
+                            <div>Valor por colaborador: <strong id="vida-unitario-2">R$ 27,99</strong></div>
+                        </div>
+                    </div>
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Opção</th>
+                                <th>Colaboradores</th>
+                                <th>Valor Total</th>
+                                <th>Valor Unitário</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Opção 1</td>
+                                <td>63</td>
+                                <td>R$ 1.668,00</td>
+                                <td>R$ 26,48</td>
+                            </tr>
+                            <tr>
+                                <td>Opção 2</td>
+                                <td>148</td>
+                                <td>R$ 4.142,79</td>
+                                <td>R$ 27,99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Seção Frota -->
+                <div class="section frota">
+                    <h2 class="section-title">Seguro de Frota</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <div class="card-title">🚗 Situação Atual</div>
+                            <div>Veículos: <strong>37</strong></div>
+                            <div>Seguradora: <strong>Bradesco</strong></div>
+                            <div class="value-display value-atual">R$ 260.050,01</div>
+                        </div>
+                        <div class="comparison-card">
+                            <div class="card-title">🚗 Nova Proposta Belz</div>
+                            <div>Veículos: <strong>37</strong></div>
+                            <div>Tokio: <strong>R$ 15.800,03</strong></div>
+                            <div>Allianz: <strong>R$ 206.507,71</strong></div>
+                            <div class="value-display value-novo" id="frota-valor-novo">R$ 222.307,74</div>
+                        </div>
+                    </div>
+                    <div class="difference" id="frota-diferenca">
+                        Economia: R$ 37.742,27
+                    </div>
+                </div>
+                <!-- Resumo Total -->
+                <div class="total-savings">
+                    <h2>💰 Economia Total Estimada</h2>
+                    <div class="amount" id="economia-total">R$ 0,00</div>
+                    <p>Valor economizado anualmente com as propostas da Belz Corretora</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
