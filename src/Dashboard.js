@@ -116,25 +116,7 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
       <VidaSection />
       <Frota />
 
-      {/* Seção Belz Conecta Saúde */}
-      <motion.div
-        className="section belz-conecta-saude super-destaque"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.7 }}
-        style={{ marginTop: 40, borderLeftColor: '#011147', boxShadow: '0 0 40px 0 #01114755', background: 'linear-gradient(135deg, #011147 60%, #ffffff 100%)', color: '#fff', position: 'relative', overflow: 'hidden' }}
-      >
-        <div style={{ position: 'absolute', top: 0, right: 0, width: '180px', height: '180px', background: 'radial-gradient(circle at 80% 20%, #fff8, transparent 70%)', zIndex: 0 }}></div>
-        <h2 className="section-title" style={{ color: '#fff', fontSize: '2.2rem', letterSpacing: 1 }}>🌟 Belz Conecta Saúde</h2>
-        <p style={{ fontSize: '1.25rem', zIndex: 1, position: 'relative', color: '#fff' }}>
-          O produto <strong style={{ color: '#fff', background: '#011147', padding: '2px 8px', borderRadius: 6 }}>Belz Conecta Saúde</strong> oferece uma solução completa de gestão e acompanhamento da saúde dos colaboradores, com acesso a uma plataforma exclusiva, suporte especializado e atendimento à NR-1.<br /><br />
-          <span style={{ display: 'inline-block', background: '#fff', color: '#011147', fontWeight: 700, padding: '8px 18px', borderRadius: 10, fontSize: '1.3rem', margin: '10px 0' }}>
-            Investimento: R$ 14.976,00
-          </span>
-        </p>
-      </motion.div>
-
-      {/* Seção Custos Atuais */}
+      {/* Seção Custos Atuais - movida para logo após Frota */}
       <motion.div
         className="section ultramega-custos"
         initial={{ opacity: 0, y: 20 }}
@@ -174,7 +156,25 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
             textAlign: 'center',
             border: '2px solid #90caf9'
           }}>
-            Economia estimada por mês com a Belz: <span style={{ color: '#1a237e', fontWeight: 900 }}>{formatCurrency((saudeEconomia + frotaEconomia))}</span>
+            Economia estimada por mês com a Belz: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency((saudeEconomia + frotaEconomia))}</span>
+          </span>
+        </p>
+      </motion.div>
+
+      {/* Seção Belz Conecta Saúde */}
+      <motion.div
+        className="section belz-conecta-saude super-destaque"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.7 }}
+        style={{ marginTop: 40, borderLeftColor: '#011147', boxShadow: '0 0 40px 0 #01114755', background: 'linear-gradient(135deg, #011147 60%, #ffffff 100%)', color: '#fff', position: 'relative', overflow: 'hidden' }}
+      >
+        <div style={{ position: 'absolute', top: 0, right: 0, width: '180px', height: '180px', background: 'radial-gradient(circle at 80% 20%, #fff8, transparent 70%)', zIndex: 0 }}></div>
+        <h2 className="section-title" style={{ color: '#fff', fontSize: '2.2rem', letterSpacing: 1 }}>🌟 Belz Conecta Saúde</h2>
+        <p style={{ fontSize: '1.25rem', zIndex: 1, position: 'relative', color: '#fff' }}>
+          O produto <strong style={{ color: '#fff', background: '#011147', padding: '2px 8px', borderRadius: 6 }}>Belz Conecta Saúde</strong> oferece uma solução completa de gestão e acompanhamento da saúde dos colaboradores, com acesso a uma plataforma exclusiva, suporte especializado e atendimento à NR-1.<br /><br />
+          <span style={{ display: 'inline-block', background: '#fff', color: '#011147', fontWeight: 700, padding: '8px 18px', borderRadius: 10, fontSize: '1.3rem', margin: '10px 0' }}>
+            Investimento: R$ 14.976,00
           </span>
         </p>
       </motion.div>
