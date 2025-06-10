@@ -125,38 +125,43 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
         style={{ marginTop: 30, borderLeftColor: '#1a237e', background: '#f5f7fa', color: '#1a237e', fontWeight: 600 }}
       >
         <h2 className="section-title" style={{ color: '#1a237e' }}>Custos Atuais:</h2>
-        <p style={{ fontSize: '1.1rem' }}>
+        <p style={{ fontSize: '1.3rem', color: '#e74c3c' }}>
           A Ultramega já possui os seguintes custos mensais:<br />
-          <span style={{ color: '#1a237e' }}><strong>Ouvidoria:</strong> R$ 1.300,00</span><br />
-          <span style={{ color: '#1a237e' }}><strong>Ginástica Laboral:</strong> R$ 2.500,00</span><br />
-          <span style={{ color: '#1a237e' }}><strong>Saúde Atual:</strong> R$ 59.214,13</span><br />
-          <span style={{ color: '#1a237e' }}><strong>Frota Atual:</strong> R$ 260.050,01</span><br />
+          <span><strong>Ouvidoria:</strong> R$ 1.300,00</span><br />
+          <span><strong>Ginástica Laboral:</strong> R$ 2.500,00</span><br />
+          <span><strong>Saúde Atual:</strong> R$ 59.214,13</span><br />
+          <span><strong>Frota Atual:</strong> R$ 260.050,01</span><br />
           <br />
-          <span style={{ display: 'inline-block', color: '#fff', background: '#1a237e', padding: '6px 16px', borderRadius: 8, fontWeight: 700, fontSize: '1.2rem', marginBottom: 8 }}>
-            Custo total atual: R$ 323.064,14 por ano
+          <span className="valor-destaque">
+            Custo total atual: <span style={{ color: '#fff', fontWeight: 900 }}>R$ 323.064,14 por ano</span>
           </span>
           <br/>
-          <span style={{ display: 'inline-block', color: '#1a237e', background: '#e3eafc', padding: '6px 16px', borderRadius: 8, fontWeight: 700, fontSize: '1.2rem', marginTop: 8, border: '1.5px solid #1a237e' }}>
-            Custo mensal: R$ 26.922,01
+          <span className="valor-destaque" style={{ marginTop: 8, border: '1.5px solid #b71c1c' }}>
+            Custo mensal: <span style={{ color: '#fff', fontWeight: 900 }}>R$ 26.922,01</span>
           </span>
         </p>
         <p style={{ fontSize: '1.15rem', marginTop: 20 }}>
           <span style={{
             display: 'block',
-            background: '#e74c3c',
+            background: '#011147',
             color: '#fff',
             fontWeight: 800,
             fontSize: '1.35rem',
             padding: '18px 0',
             borderRadius: 14,
-            boxShadow: '0 2px 12px #e74c3c22',
+            boxShadow: '0 2px 12px #1976d222',
             letterSpacing: 0.5,
             margin: '0 auto',
             width: '100%',
             textAlign: 'center',
-            border: '2px solid #e74c3c'
+            border: '2px solid #011147',
           }}>
-            Economia estimada por mês com a Belz: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency((saudeEconomia + frotaEconomia))}</span>
+            <span style={{ color: '#fff', fontWeight: 900, fontSize: '1.35rem', display: 'inline-block', width: '100%' }}>
+              Economia estimada por mês com a Belz:<br />
+              <span style={{ color: '#fff', fontWeight: 900, fontSize: '2.2rem', letterSpacing: 1, display: 'block', marginTop: 8 }}>
+                {formatCurrency((saudeEconomia + frotaEconomia))}
+              </span>
+            </span>
           </span>
         </p>
       </motion.div>
@@ -207,10 +212,23 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
         transition={{ duration: 0.5 }}
       >
         <h2 style={{ color: '#1a237e' }}>💰 Economia Total Estimada</h2>
-        <div className="amount" style={{ color: '#1976d2' }}>{formatCurrency(saudeEconomia + frotaEconomia)}</div>
+        <div className="amount" style={{ color: '#011147', fontSize: '3.2rem'}}>{formatCurrency(saudeEconomia + frotaEconomia)}</div>
         <p style={{ color: '#1a237e' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
-        <p style={{ fontSize: '1.2rem', marginTop: 10, color: '#1976d2', fontWeight: 700 }}>
-          Economia estimada por mês: {formatCurrency((saudeEconomia + frotaEconomia) / 12)}
+        <p style={{ fontSize: '1.2rem', marginTop: 10 }}>
+          <span style={{
+            display: 'inline-block',
+            background: '#011147',
+            color: '#fff',
+            fontWeight: 900,
+            fontSize: '2.25rem',
+            padding: '10px 24px',
+            borderRadius: 10,
+            boxShadow: '0 2px 12px #e74c3c22',
+            letterSpacing: 0.5,
+            border: '2px solid ##011147',
+          }}>
+            Economia estimada por mês: {formatCurrency((saudeEconomia + frotaEconomia) / 12)}
+          </span>
         </p>
       </motion.div>
     </motion.div>

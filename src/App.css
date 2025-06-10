@@ -441,22 +441,20 @@ body {
 .ultramega-custos {
   border-left: 8px solid #e74c3c !important;
   background: #fff5f5 !important;
-  color: #e74c3c !important;
+  color: #1a237e !important;
   font-weight: 600;
 }
 .ultramega-custos .section-title {
   color: #e74c3c !important;
 }
-.ultramega-custos strong, .ultramega-custos span {
-  color: #e74c3c !important;
-}
-.ultramega-custos span[style*="background"] {
+.ultramega-custos .valor-destaque {
   background: #e74c3c !important;
   color: #fff !important;
   padding: 6px 16px;
   border-radius: 8px;
   font-weight: 700;
   font-size: 1.2rem;
+  display: inline-block;
 }
 @media (max-width: 768px) {
   .super-destaque .section-title {
