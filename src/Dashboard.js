@@ -143,18 +143,18 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
         <p style={{ fontSize: '1.15rem', marginTop: 20 }}>
           <span style={{
             display: 'block',
-            background: '#e3eafc',
-            color: '#1a237e',
+            background: '#e74c3c',
+            color: '#fff',
             fontWeight: 800,
             fontSize: '1.35rem',
             padding: '18px 0',
             borderRadius: 14,
-            boxShadow: '0 2px 12px #1a237e11',
+            boxShadow: '0 2px 12px #e74c3c22',
             letterSpacing: 0.5,
             margin: '0 auto',
             width: '100%',
             textAlign: 'center',
-            border: '2px solid #90caf9'
+            border: '2px solid #e74c3c'
           }}>
             Economia estimada por mês com a Belz: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency((saudeEconomia + frotaEconomia))}</span>
           </span>
