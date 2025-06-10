@@ -63,7 +63,8 @@ function Frota() {
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        Economia: {formatCurrency(frotaEconomia)}
+        Economia anual: {formatCurrency(frotaEconomia)}
+        Economia mensal: {formatCurrency(frotaEconomia / 12)}
       </motion.div>
     </motion.div>
   );
