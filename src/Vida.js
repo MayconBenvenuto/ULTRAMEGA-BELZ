@@ -9,7 +9,7 @@ function Vida() {
   const vidaUnitario2 = 4142.79 / 148;
 
   const data = [
-    { name: 'Opção 1', colaboradores: 63, valorTotal: 1668, valorUnitario: vidaUnitario1 },
+    { name: 'Opção 1', colaboradores: 63, valorTotal: 1763.37, valorUnitario: vidaUnitario1 },
     { name: 'Opção 2', colaboradores: 148, valorTotal: 4142.79, valorUnitario: vidaUnitario2 }
   ];
 
@@ -86,7 +86,7 @@ function Vida() {
             <tr>
               <td>Opção 1</td>
               <td>63</td>
-              <td>R$ 1.668,00</td>
+              <td>R$ 1.763,37</td>
               <td>{formatCurrency(vidaUnitario1)}</td>
             </tr>
             <tr>

@@ -57,35 +57,6 @@ function Frota() {
         </motion.div>
       </div>
 
-      <div style={{ height: '200px', marginTop: '20px' }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip 
-              formatter={(value) => formatCurrency(value)}
-              contentStyle={{
-                background: isDark ? "#2d3436" : "#fff",
-                border: "none",
-                borderRadius: "8px",
-                color: isDark ? "#fff" : "#000"
-              }}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-
       <motion.div 
         className={frotaEconomia > 0 ? "difference" : "difference negative"}
         initial={{ scale: 0.8 }}
