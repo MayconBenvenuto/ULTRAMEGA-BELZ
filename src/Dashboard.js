@@ -257,7 +257,7 @@ function Dashboard() {
             Economia estimada por MÊS: {formatCurrency((saudeEconomia + frotaEconomia) / 12)}
           </span>
         </p>
-        <div className="amount" style={{ color: '#011147', fontSize: '3.2rem', marginTop: 18 }}>Economia estimada por ANO:{formatCurrency(saudeEconomia + frotaEconomia)}</div>
+        <div className="amount" style={{ color: '#011147', fontSize: '1.4rem', marginTop: 18 }}>Economia estimada por ANO:{formatCurrency(saudeEconomia + frotaEconomia)}</div>
         <p style={{ color: '#1a237e' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
       </motion.div>
     </motion.div>
