@@ -135,7 +135,7 @@ function Dashboard() {
           style={{ marginTop: 30, borderLeftColor: '#1a237e', background: '#f5f7fa', color: '#1a237e', fontWeight: 600 }}
         >
           <h2 className="section-title" style={{ color: '#1a237e' }}>Custos Atuais:</h2>
-          <p style={{ fontSize: '1.3rem', color: '#e74c3c' }}>
+          <p style={{ fontSize: '1.4rem', color: '#e74c3c' }}>
             A Ultramega já possui os seguintes custos mensais:<br />
             <span><strong>Ouvidoria:</strong> R$ {ouvidoria.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
             <span><strong>Ginástica Laboral:</strong> R$ {ginasticaLaboral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
@@ -144,37 +144,14 @@ function Dashboard() {
             <span><strong>Frota Atual Mensal:</strong> R$ {(frotaAtual/12).toLocaleString('pt-BR', {minimumFractionDigits: 2 })}</span><br />
             <br />
             <span className="valor-destaque">
-          Custo total atual: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoTotalAtualAno)} por ano</span>
+          Custo Anual: <span style={{ color: '#fff', fontWeight: 900,'fontSize': '1.8rem' }}>{formatCurrency(custoTotalAtualAno)}</span>
             </span>
             <br/>
             <span className="valor-destaque" style={{ marginTop: 8, border: '1.5px solid #b71c1c' }}>
-          Custo mensal: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoMensalAtual)}</span>
+          Custo Mensal: <span style={{ color: '#fff', fontWeight: 900,'fontSize': '1.8rem' }}>{formatCurrency(custoMensalAtual)}</span>
             </span>
           </p>
-          <p style={{ fontSize: '1.15rem', marginTop: 20 }}>
-            <span style={{
-          display: 'block',
-          background: '#011147',
-          color: '#fff',
-          fontWeight: 800,
-          fontSize: '1.35rem',
-          padding: '18px 0',
-          borderRadius: 14,
-          boxShadow: '0 2px 12px #1976d222',
-          letterSpacing: 0.5,
-          margin: '0 auto',
-          width: '100%',
-          textAlign: 'center',
-          border: '2px solid #011147',
-            }}>
-          <span style={{ color: '#fff', fontWeight: 900, fontSize: '1.35rem', display: 'inline-block', width: '100%' }}>
-            Economia estimada por mês com a Belz:<br />
-            <span style={{ color: '#fff', fontWeight: 900, fontSize: '2.2rem', letterSpacing: 1, display: 'block', marginTop: 8 }}>
-              {formatCurrency((saudeEconomia + frotaEconomia))}
-            </span>
-          </span>
-            </span>
-          </p>
+         
         </motion.div>
 
         {/* Seção Belz Conecta Saúde */}
