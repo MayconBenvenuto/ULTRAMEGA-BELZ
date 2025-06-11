@@ -160,7 +160,7 @@ function Dashboard() {
           className="card-title"
           style={{
           fontWeight: 700,
-          fontSize: "1.25rem",
+          fontSize: "1.95rem",
           marginBottom: 10,
           color: "#fff",
           textAlign: "center",
@@ -168,7 +168,7 @@ function Dashboard() {
         >
           👥 Opção 1
           <br />
-          <span style={{ fontSize: "1.1rem", fontWeight: 400 }}>
+          <span style={{ fontSize: "1.6rem", fontWeight: 400 }}>
           {vidaColaboradoresAtual} colaboradores
           </span>
         </div>
@@ -212,7 +212,7 @@ function Dashboard() {
           className="card-title"
           style={{
           fontWeight: 700,
-          fontSize: "1.25rem",
+          fontSize: "1.95rem",
           marginBottom: 10,
           color: "#fff",
           textAlign: "center",
@@ -220,7 +220,7 @@ function Dashboard() {
         >
           👥 Opção 2
           <br />
-          <span style={{ fontSize: "1.1rem", fontWeight: 400 }}>
+          <span style={{ fontSize: "1.6rem", fontWeight: 400 }}>
           {vidaColaboradoresBelz} colaboradores
           </span>
         </div>
