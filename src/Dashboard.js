@@ -169,7 +169,7 @@ function Dashboard() {
           👥 Opção 1
           <br />
           <span style={{ fontSize: "1.6rem", fontWeight: 400 }}>
-          {vidaColaboradoresAtual} colaboradores
+          {vidaColaboradoresAtual} vidas
           </span>
         </div>
         <div
@@ -221,7 +221,7 @@ function Dashboard() {
           👥 Opção 2
           <br />
           <span style={{ fontSize: "1.6rem", fontWeight: 400 }}>
-          {vidaColaboradoresBelz} colaboradores
+          {vidaColaboradoresBelz} vidas
           </span>
         </div>
         <div
@@ -262,13 +262,13 @@ function Dashboard() {
         zIndex: 2,
         }}
       >
-        <div style={{fontWeight: 700, fontSize: "1.8rem" }}>
-          <span style={{ color: "#ffd600", fontWeight: 700 }}>
+        <div style={{fontWeight: 700, fontSize: "2.4rem" }}>
+          <span style={{ color: "#FF4500", fontWeight: 700 }}>
           Custo Atual:
           </span>{" "}
           <br/>
           {33} vidas{" "}
-          <span style={{ color: "#ffd600", fontWeight: 700 }}>
+          <span style={{ color: "#FF4500", fontWeight: 700 }}>
           {formatCurrency(vidaAtual)}
           </span>
         </div>
