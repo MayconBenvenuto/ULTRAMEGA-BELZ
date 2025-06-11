@@ -169,11 +169,12 @@ function Dashboard() {
           position: 'relative',
           overflow: 'hidden',
           borderRadius: 36,
-          padding: '0',
+          padding: 0,
           minHeight: 340,
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'stretch',
+          alignItems: 'center', // alinhamento vertical central
+          justifyContent: 'center', // alinhamento horizontal central
           gap: 0,
         }}
       >
@@ -181,39 +182,31 @@ function Dashboard() {
         <div style={{ position: 'absolute', top: -60, right: -60, width: 320, height: 320, background: 'radial-gradient(circle at 80% 20%, #fff3, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
         <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, background: 'radial-gradient(circle at 10% 90%, #1976d2aa, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
         {/* Coluna texto */}
-        <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2 className="section-title" style={{ color: '#fff', fontSize: '2.7rem', letterSpacing: 1.5, fontWeight: 900, marginBottom: 18, textShadow: '0 4px 24px #011147cc', display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ fontSize: '2.2rem', marginRight: 0, display: 'flex', alignItems: 'center' }}>
-              {/* SVG ícone premium */}
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 6 }}>
-                <circle cx="19" cy="19" r="19" fill="#fff" fillOpacity="0.13" />
-                <path d="M19 7l3.09 6.26L29 14.27l-5 4.87L25.18 27 19 22.73 12.82 27 15 19.14l-5-4.87 6.91-1.01L19 7z" fill="#ffe082" stroke="#fff" strokeWidth="1.2" />
-              </svg>
-              Belz Conecta Saúde
-            </span>
+        <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+          <h2 className="section-title" style={{ color: '#fff', fontSize: '2.7rem', letterSpacing: 1.5, fontWeight: 900, marginBottom: 18, textShadow: '0 4px 24px #011147cc', display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center', textAlign: 'center' }}>
+            Belz Conecta Saúde
           </h2>
-          <p style={{ fontSize: '1.35rem', color: '#e3eafc', fontWeight: 400, lineHeight: 1.7, marginBottom: 22, textShadow: '0 2px 8px #01114788', maxWidth: 540 }}>
+          <p style={{ fontSize: '1.35rem', color: '#e3eafc', fontWeight: 400, lineHeight: 1.7, marginBottom: 22, textShadow: '0 2px 8px #01114788', maxWidth: 540, textAlign: 'center', alignSelf: 'center' }}>
             O <strong style={{ color: '#fff', background: '#1976d2', padding: '4px 18px', borderRadius: 12, fontSize: '1.15em', fontWeight: 900, boxShadow: '0 2px 12px #01114733', letterSpacing: 1 }}>Belz Conecta Saúde</strong> é uma solução premium para gestão e acompanhamento da saúde dos colaboradores, com plataforma exclusiva, suporte especializado e atendimento à NR-1. Eleva o padrão de cuidado e eficiência para sua empresa.
           </p>
-          <span style={{ display: 'inline-block', background: 'linear-gradient(90deg, #fff 60%, #e3eafc 100%)', color: '#011147', fontWeight: 900, padding: '18px 44px', borderRadius: 22, fontSize: '2.1rem', margin: '10px 0', boxShadow: '0 4px 24px #01114722', letterSpacing: 1.5, border: '2.5px solid #fff', textShadow: '0 2px 8px #fff8', boxSizing: 'border-box', minWidth: 320 }}>
+          <span style={{ display: 'inline-block', background: 'linear-gradient(90deg, #fff 60%, #e3eafc 100%)', color: '#011147', fontWeight: 900, padding: '18px 44px', borderRadius: 22, fontSize: '2.1rem', margin: '10px 0', boxShadow: '0 4px 24px #01114722', letterSpacing: 1.5, border: '2.5px solid #fff', textShadow: '0 2px 8px #fff8', boxSizing: 'border-box', minWidth: 220, textAlign: 'center' }}>
             Investimento: R$ 14.976,00
           </span>
         </div>
         {/* Coluna ilustração moderna */}
         <div style={{ flex: 1, minWidth: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1, position: 'relative', padding: '32px 32px 32px 0' }}>
           {/* SVG ilustração saúde moderna */}
-          <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="90" cy="90" rx="88" ry="60" fill="#fff" fillOpacity="0.08" />
-            <rect x="60" y="60" width="60" height="60" rx="18" fill="#fff" fillOpacity="0.18" />
-            <path d="M90 120c-16-18-24-28-24-40a24 24 0 1148 0c0 12-8 22-24 40z" fill="#ffe082" stroke="#1976d2" strokeWidth="2.5" />
-            <circle cx="90" cy="80" r="10" fill="#1976d2" stroke="#fff" strokeWidth="2" />
-            <rect x="80" y="110" width="20" height="8" rx="4" fill="#1976d2" />
-          </svg>
+          <img 
+                src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
+                alt="Logo Conecta Saúde" 
+                style={{ height: 220, width: 250, marginRight: 6, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' }} 
+                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />
         </div>
       </motion.div>
 
-      <div className="chart-section">
-        <h2 className="section-title">📊 Comparativo de Valores</h2>
+      <div className="chart-section" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+        <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>📊 Comparativo de Valores</h2>
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={chartData} barCategoryGap={30} barGap={8}>
             <XAxis dataKey="name" stroke={isDark ? "#fff" : "#011147"} />
@@ -239,9 +232,10 @@ function Dashboard() {
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', width: '100%' }}
       >
-        <h2 style={{ color: '#1a237e' }}>💰 Economia Total Estimada</h2>
-        <p style={{ fontSize: '1.2rem', marginTop: 10 }}>
+        <h2 style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>💰 Economia Total Estimada</h2>
+        <p style={{ fontSize: '1.2rem', marginTop: 10, textAlign: 'center' }}>
           <span style={{
             display: 'inline-block',
             background: '#011147',
@@ -253,12 +247,15 @@ function Dashboard() {
             boxShadow: '0 2px 12px #e74c3c22',
             letterSpacing: 0.5,
             border: '2px solid #011147',
+            textAlign: 'center',
+            width: '100%',
+            maxWidth: 420
           }}>
             Economia estimada por MÊS: {formatCurrency((saudeEconomia + frotaEconomia) / 12)}
           </span>
         </p>
-        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18 }}>Economia estimada por ANO:{formatCurrency(saudeEconomia + frotaEconomia)}</div>
-        <p style={{ color: '#1a237e' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
+        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>Economia estimada por ANO:{formatCurrency(saudeEconomia + frotaEconomia)}</div>
+        <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
       </motion.div>
     </motion.div>
   );

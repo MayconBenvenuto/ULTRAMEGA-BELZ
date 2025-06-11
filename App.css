@@ -1,0 +1,64 @@
+/* Responsividade e centralização para Dashboard e seções principais */
+.dashboard, .section, .chart-section, .total-savings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  box-sizing: border-box;
+}
+
+.chart-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 32px auto;
+}
+
+.summary-table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .section, .chart-section {
+    max-width: 98vw;
+    padding: 0 8px;
+  }
+  .summary-table {
+    max-width: 98vw;
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard, .section, .chart-section, .total-savings {
+    padding: 0 4px;
+  }
+  .section {
+    padding: 18px 4px;
+  }
+  .belz-conecta-saude.super-destaque {
+    flex-direction: column !important;
+    padding: 0 !important;
+    min-height: unset !important;
+  }
+  .belz-conecta-saude .section-title {
+    font-size: 1.5rem !important;
+    text-align: center;
+  }
+  .belz-conecta-saude > div {
+    padding: 24px 8px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .summary-table {
+    font-size: 0.9em;
+  }
+}
