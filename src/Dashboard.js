@@ -224,8 +224,6 @@ function Dashboard() {
         transition={{ duration: 0.5 }}
       >
         <h2 style={{ color: '#1a237e' }}>💰 Economia Total Estimada</h2>
-        <div className="amount" style={{ color: '#011147', fontSize: '3.2rem'}}>{formatCurrency(saudeEconomia + frotaEconomia)}</div>
-        <p style={{ color: '#1a237e' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
         <p style={{ fontSize: '1.2rem', marginTop: 10 }}>
           <span style={{
             display: 'inline-block',
@@ -237,11 +235,13 @@ function Dashboard() {
             borderRadius: 10,
             boxShadow: '0 2px 12px #e74c3c22',
             letterSpacing: 0.5,
-            border: '2px solid ##011147',
+            border: '2px solid #011147',
           }}>
             Economia estimada por mês: {formatCurrency((saudeEconomia + frotaEconomia) / 12)}
           </span>
         </p>
+        <div className="amount" style={{ color: '#011147', fontSize: '3.2rem', marginTop: 18 }}>{formatCurrency(saudeEconomia + frotaEconomia)}</div>
+        <p style={{ color: '#1a237e' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
       </motion.div>
     </motion.div>
   );
