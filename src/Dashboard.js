@@ -18,7 +18,6 @@ function Dashboard() {
   const frotaNovo = 15800.03 + 206507.71;
   const vidaOp1Colaboradores = 63;
   const vidaUnitario = 27.99;
-  
   const vidaOp2Colaboradores = 148;
   const vidaOp2Total = 4142.79;
 
@@ -26,8 +25,8 @@ function Dashboard() {
   const vidaOp1Total = vidaUnitario * vidaOp1Colaboradores;
   const saudeEconomia = saudeAtual - saudeNovo;
   const frotaEconomia = frotaAtual - frotaNovo;
-  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual * 12;
-  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + frotaAtual;
+  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual  + frotaAtual ;
+  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual/12 + frotaAtual/12;
 
   // Atualize o comparativo para incluir Vida
   const chartData = [
@@ -128,56 +127,57 @@ function Dashboard() {
       <Frota />
 
       {/* Seção Custos Atuais - movida para logo após Frota */}
-      <motion.div
-        className="section ultramega-custos"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 1 }}
-        style={{ marginTop: 30, borderLeftColor: '#1a237e', background: '#f5f7fa', color: '#1a237e', fontWeight: 600 }}
-      >
-        <h2 className="section-title" style={{ color: '#1a237e' }}>Custos Atuais:</h2>
-        <p style={{ fontSize: '1.3rem', color: '#e74c3c' }}>
-          A Ultramega já possui os seguintes custos mensais:<br />
-          <span><strong>Ouvidoria:</strong> R$ {ouvidoria.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-          <span><strong>Ginástica Laboral:</strong> R$ {ginasticaLaboral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-          <span><strong>Saúde Atual:</strong> R$ {saudeAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-          <span><strong>Frota Atual:</strong> R$ {frotaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-          <br />
-          <span className="valor-destaque">
-            Custo total atual: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoTotalAtualAno)} por ano</span>
-          </span>
-          <br/>
-          <span className="valor-destaque" style={{ marginTop: 8, border: '1.5px solid #b71c1c' }}>
-            Custo mensal: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoMensalAtual)}</span>
-          </span>
-        </p>
-        <p style={{ fontSize: '1.15rem', marginTop: 20 }}>
-          <span style={{
-            display: 'block',
-            background: '#011147',
-            color: '#fff',
-            fontWeight: 800,
-            fontSize: '1.35rem',
-            padding: '18px 0',
-            borderRadius: 14,
-            boxShadow: '0 2px 12px #1976d222',
-            letterSpacing: 0.5,
-            margin: '0 auto',
-            width: '100%',
-            textAlign: 'center',
-            border: '2px solid #011147',
-          }}>
-            <span style={{ color: '#fff', fontWeight: 900, fontSize: '1.35rem', display: 'inline-block', width: '100%' }}>
-              Economia estimada por mês com a Belz:<br />
-              <span style={{ color: '#fff', fontWeight: 900, fontSize: '2.2rem', letterSpacing: 1, display: 'block', marginTop: 8 }}>
-                {formatCurrency((saudeEconomia + frotaEconomia))}
-              </span>
+        <motion.div
+          className="section ultramega-custos"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1 }}
+          style={{ marginTop: 30, borderLeftColor: '#1a237e', background: '#f5f7fa', color: '#1a237e', fontWeight: 600 }}
+        >
+          <h2 className="section-title" style={{ color: '#1a237e' }}>Custos Atuais:</h2>
+          <p style={{ fontSize: '1.3rem', color: '#e74c3c' }}>
+            A Ultramega já possui os seguintes custos mensais:<br />
+            <span><strong>Ouvidoria:</strong> R$ {ouvidoria.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+            <span><strong>Ginástica Laboral:</strong> R$ {ginasticaLaboral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+            <span><strong>Saúde Atual:</strong> R$ {saudeAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+            <span><strong>Frota Atual Anual:</strong> R$ {frotaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+            <span><strong>Frota Atual Mensal:</strong> R$ {(frotaAtual/12).toLocaleString('pt-BR', {minimumFractionDigits: 2 })}</span><br />
+            <br />
+            <span className="valor-destaque">
+          Custo total atual: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoTotalAtualAno)} por ano</span>
+            </span>
+            <br/>
+            <span className="valor-destaque" style={{ marginTop: 8, border: '1.5px solid #b71c1c' }}>
+          Custo mensal: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoMensalAtual)}</span>
+            </span>
+          </p>
+          <p style={{ fontSize: '1.15rem', marginTop: 20 }}>
+            <span style={{
+          display: 'block',
+          background: '#011147',
+          color: '#fff',
+          fontWeight: 800,
+          fontSize: '1.35rem',
+          padding: '18px 0',
+          borderRadius: 14,
+          boxShadow: '0 2px 12px #1976d222',
+          letterSpacing: 0.5,
+          margin: '0 auto',
+          width: '100%',
+          textAlign: 'center',
+          border: '2px solid #011147',
+            }}>
+          <span style={{ color: '#fff', fontWeight: 900, fontSize: '1.35rem', display: 'inline-block', width: '100%' }}>
+            Economia estimada por mês com a Belz:<br />
+            <span style={{ color: '#fff', fontWeight: 900, fontSize: '2.2rem', letterSpacing: 1, display: 'block', marginTop: 8 }}>
+              {formatCurrency((saudeEconomia + frotaEconomia))}
             </span>
           </span>
-        </p>
-      </motion.div>
+            </span>
+          </p>
+        </motion.div>
 
-      {/* Seção Belz Conecta Saúde */}
+        {/* Seção Belz Conecta Saúde */}
       <motion.div
         className="section belz-conecta-saude super-destaque"
         initial={{ opacity: 0, y: 20 }}
