@@ -122,6 +122,15 @@ function Dashboard() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {/* Logo institucional Belz */}
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '32px 0 18px 0' }}>
+        <img
+          src="/belz-logo.png"
+          alt="Belz Corretora de Seguros"
+          style={{ height: 74, maxWidth: '90vw', objectFit: 'contain', filter: 'drop-shadow(0 2px 12px #01114744)' }}
+        />
+      </div>
+
       <Saude />
       <VidaSection />
       <Frota />
