@@ -9,31 +9,27 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
 
-  // Variáveis centralizadas para custos
+  // NOVOS VALORES ATUALIZADOS (conforme solicitado)
+  // Custos atuais Ultramega
   const ouvidoria = 1300.00;
   const ginasticaLaboral = 2500.00;
   const saudeAtual = 59214.13;
-  const saudeNovo = 47100.53;
-  const frotaAtual = 260050.01;
-  const frotaNovo = 15800.03 + 206507.71;
-  const vidaOp1Colaboradores = 63;
-  const vidaUnitario = 27.99;
-  const vidaOp2Colaboradores = 148;
-  const vidaOp2Total = 4142.79;
+  const frotaAtual = 21670.83;
+  const vidaAtual = 668.80;
+  const custoMensalAtual = ouvidoria+ginasticaLaboral+saudeAtual+frotaAtual+vidaAtual; // valor informado
+  const custoTotalAtualAno = custoMensalAtual * 12; // valor informado
 
-  // Cálculos
-  const vidaOp1Total = vidaUnitario * vidaOp1Colaboradores;
-  const saudeEconomia = saudeAtual - saudeNovo;
-  const frotaEconomia = frotaAtual - frotaNovo;
-  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual  + frotaAtual ;
-  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual/12 + frotaAtual/12;
+  // Proposta Belz
+  const saudeNovo = 47100.00;
+  const vidaNovo = 4142.79;
+  const frotaNovo = 18525.64;
+  const conectaSaude = 14976.00;
+  const custoMensalBelz = 84744.43; // valor informado
+  const custoTotalBelzAno = 1016933.16; // valor informado
 
-  // Atualize o comparativo para incluir Vida
-  const chartData = [
-    { name: "Saúde", atual: saudeAtual, novo: saudeNovo },
-    { name: "Frota", atual: frotaAtual, novo: frotaNovo },
-    { name: "Vida", atual: 668, novo: vidaOp2Total },
-  ];
+  // Cálculo da economia
+  const economiaMensal = custoMensalAtual - custoMensalBelz;
+  const economiaAnual = custoTotalAtualAno - custoTotalBelzAno;
 
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
@@ -65,6 +61,11 @@ function Dashboard() {
 
   // Substitua o componente <Vida /> por:
   function VidaSection() {
+    // Dados fixos para exibição
+    const vidaColaboradoresAtual = 24; // Exemplo, ajuste se necessário
+    const vidaColaboradoresBelz = 148; // Exemplo, ajuste se necessário
+    const vidaUnitarioAtual = vidaAtual / vidaColaboradoresAtual;
+    const vidaUnitarioBelz = vidaNovo / vidaColaboradoresBelz;
     return (
       <motion.div 
         className="section vida"
@@ -75,21 +76,21 @@ function Dashboard() {
         <h2 className="section-title">Seguro de Vida</h2>
         <div className="comparison-grid">
           <motion.div className="comparison-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <div className="card-title">👥 Opção 1 - {vidaOp1Colaboradores} Colaboradores</div>
-            <div className="value-display value-novo">{formatCurrency(vidaOp1Total)}</div>
-            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitario)}</strong></div>
+            <div className="card-title">👥 Atual - {vidaColaboradoresAtual} Colaboradores</div>
+            <div className="value-display value-novo">{formatCurrency(vidaAtual)}</div>
+            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioAtual)}</strong></div>
           </motion.div>
           <motion.div className="comparison-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <div className="card-title">👥 Opção 2 - {vidaOp2Colaboradores} Colaboradores</div>
-            <div className="value-display value-novo">{formatCurrency(vidaOp2Total)}</div>
-            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitario)}</strong></div>
+            <div className="card-title">👥 Belz - {vidaColaboradoresBelz} Colaboradores</div>
+            <div className="value-display value-novo">{formatCurrency(vidaNovo)}</div>
+            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioBelz)}</strong></div>
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
           <table className="summary-table">
             <thead>
               <tr>
-                <th>Opção</th>
+                <th>Condição</th>
                 <th>Colaboradores</th>
                 <th>Valor Total</th>
                 <th>Valor Unitário</th>
@@ -97,16 +98,16 @@ function Dashboard() {
             </thead>
             <tbody>
               <tr>
-                <td>Opção 1</td>
-                <td>{vidaOp1Colaboradores}</td>
-                <td>{formatCurrency(vidaOp1Total)}</td>
-                <td>{formatCurrency(vidaUnitario)}</td>
+                <td>Atual</td>
+                <td>{vidaColaboradoresAtual}</td>
+                <td>{formatCurrency(vidaAtual)}</td>
+                <td>{formatCurrency(vidaUnitarioAtual)}</td>
               </tr>
               <tr>
-                <td>Opção 2</td>
-                <td>{vidaOp2Colaboradores}</td>
-                <td>{formatCurrency(vidaOp2Total)}</td>
-                <td>{formatCurrency(vidaUnitario)}</td>
+                <td>Belz</td>
+                <td>{vidaColaboradoresBelz}</td>
+                <td>{formatCurrency(vidaNovo)}</td>
+                <td>{formatCurrency(vidaUnitarioBelz)}</td>
               </tr>
             </tbody>
           </table>
@@ -140,8 +141,8 @@ function Dashboard() {
             <span><strong>Ouvidoria:</strong> R$ {ouvidoria.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
             <span><strong>Ginástica Laboral:</strong> R$ {ginasticaLaboral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
             <span><strong>Saúde Atual:</strong> R$ {saudeAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <span><strong>Frota Atual Anual:</strong> R$ {frotaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <span><strong>Frota Atual Mensal:</strong> R$ {(frotaAtual/12).toLocaleString('pt-BR', {minimumFractionDigits: 2 })}</span><br />
+            <span><strong>Frota Atual:</strong> R$ {frotaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+            <span><strong>Vida:</strong> R$ {vidaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
             <br />
             <span className="valor-destaque">
           Custo Anual: <span style={{ color: '#fff', fontWeight: 900,'fontSize': '1.8rem' }}>{formatCurrency(custoTotalAtualAno)}</span>
@@ -154,7 +155,7 @@ function Dashboard() {
          
         </motion.div>
 
-        {/* Seção Belz Conecta Saúde */}
+      {/* Seção Belz Conecta Saúde + Proposta Belz */}
       <motion.div
         className="section belz-conecta-saude super-destaque"
         initial={{ opacity: 0, y: 20 }}
@@ -173,8 +174,8 @@ function Dashboard() {
           minHeight: 340,
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'center', // alinhamento vertical central
-          justifyContent: 'center', // alinhamento horizontal central
+          alignItems: 'center',
+          justifyContent: 'center',
           gap: 0,
         }}
       >
@@ -183,26 +184,30 @@ function Dashboard() {
         <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, background: 'radial-gradient(circle at 10% 90%, #1976d2aa, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
         {/* Coluna texto */}
         <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-          {/* SVG ilustração saúde moderna */}
           <img 
                 src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
                 alt="Logo Conecta Saúde" 
                 style={{ height: 220, width: 250, marginRight: 6, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
                 onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
               />
-          <p style={{ fontSize: '1.15rem', color: '#e3eafc', fontWeight: 400, lineHeight: 1.7, marginBottom: 22, textShadow: '0 2px 8px #01114788', textAlign: 'center', alignSelf: 'center' }}>
-            O <strong style={{ color: '#fff', background: '#1976d2', padding: '4px 18px', borderRadius: 12, fontSize: '1.15em', fontWeight: 900, boxShadow: '0 2px 12px #01114733', letterSpacing: 1 }}>Belz Conecta Saúde</strong> é uma solução premium para gestão e acompanhamento da saúde dos colaboradores, com plataforma exclusiva, suporte especializado e atendimento à NR-1. Eleva o padrão de cuidado e eficiência para sua empresa.
-          </p>
-          <span style={{ display: 'inline-block', background: 'linear-gradient(90deg, #fff 60%, #e3eafc 100%)', color: '#011147', fontWeight: 900, padding: '18px 44px', borderRadius: 22, fontSize: '2.1rem', margin: '10px 0', boxShadow: '0 4px 24px #01114722', letterSpacing: 1.5, border: '2.5px solid #fff', textShadow: '0 2px 8px #fff8', boxSizing: 'border-box', minWidth: 220, textAlign: 'center' }}>
-            Investimento: R$ 14.976,00
-          </span>
+
+              <img 
+                src={process.env.PUBLIC_URL + '/proposta-belz.svg?v=1'} 
+                alt="Logo Conecta Saúde" 
+                style={{ height: 720, width: 1280, marginRight: 6, borderRadius: 12, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />          
         </div>
       </motion.div>
 
       <div className="chart-section" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
-        <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>📊 Comparativo de Valores</h2>
+        <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>📊 Comparativo de Valores Anual</h2>
         <ResponsiveContainer width="100%" height={400}>
-          <BarChart data={chartData} barCategoryGap={30} barGap={8}>
+          <BarChart data={[
+            { name: "Saúde", atual: saudeAtual*12, novo: saudeNovo*12 },
+            { name: "Frota", atual: frotaAtual*12, novo: frotaNovo*12 },
+            { name: "Vida", atual: vidaAtual*12, novo: vidaNovo*12 },
+          ]} barCategoryGap={30} barGap={8}>
             <XAxis dataKey="name" stroke={isDark ? "#fff" : "#011147"} />
             <YAxis stroke={isDark ? "#fff" : "#011147"} />
             <Tooltip
@@ -215,8 +220,8 @@ function Dashboard() {
               }}
             />
             <Legend wrapperStyle={{ fontSize: '1.1rem' }} />
-            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" maxBarSize={60} minPointSize={vidaOp2Total > 0 ? 30 : 20} />
-            <Bar dataKey="novo" fill="#1976d2" name="Valor Novo" maxBarSize={90} minPointSize={vidaOp2Total > 0 ? 50 : 30} />
+            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" maxBarSize={60} minPointSize={30} />
+            <Bar dataKey="novo" fill="#1976d2" name="Valor Belz" maxBarSize={90} minPointSize={50} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -245,10 +250,10 @@ function Dashboard() {
             width: '100%',
             maxWidth: 420
           }}>
-            Economia estimada por MÊS: {formatCurrency((saudeEconomia + frotaEconomia) / 12)}
+            Economia estimada por MÊS: {formatCurrency(economiaMensal)}
           </span>
         </p>
-        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>Economia estimada por ANO:{formatCurrency(saudeEconomia + frotaEconomia)}</div>
+        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>Economia estimada por ANO: {formatCurrency(economiaAnual)}</div>
         <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
       </motion.div>
     </motion.div>
