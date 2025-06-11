@@ -193,10 +193,33 @@ function Dashboard() {
 
               <img 
                 src={process.env.PUBLIC_URL + '/proposta-belz.svg?v=1'} 
-                alt="Logo Conecta Saúde" 
-                style={{ height: 720, width: 1280, marginRight: 6, borderRadius: 12, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+                alt="Proposta Belz" 
+                className="proposta-belz-img"
+                style={{
+                  width: '100%',
+                  maxWidth: 720,
+                  height: 'auto',
+                  borderRadius: 12,
+                  background: '',
+                  boxShadow: '0 2px 8px #01114733',
+                  objectFit: 'contain',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto',
+                  display: 'block',
+                }}
                 onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />          
+              />
+              <style>{`
+                @media (max-width: 600px) {
+                  .proposta-belz-img {
+                    max-width: 98vw !important;
+                    min-width: 0 !important;
+                    width: 98vw !important;
+                    height: auto !important;
+                  }
+                }
+              `}</style>          
         </div>
       </motion.div>
 
