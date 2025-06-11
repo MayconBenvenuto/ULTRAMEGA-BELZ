@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import Saude from "./Saude";
 import Frota from "./Frota";
 import { useTheme } from "./ThemeContext";
 
-function Dashboard() {  const [loading, setLoading] = useState(true);
+function Dashboard() {  
+  const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
 
+  // Variáveis centralizadas para custos
+  const ouvidoria = 1300.00;
+  const ginasticaLaboral = 2500.00;
   const saudeAtual = 59214.13;
   const saudeNovo = 47100.53;
-  const saudeEconomia = saudeAtual - saudeNovo;
-
   const frotaAtual = 260050.01;
   const frotaNovo = 15800.03 + 206507.71;
-  const frotaEconomia = frotaAtual - frotaNovo;
+  const vidaOp1Colaboradores = 63;
+  const vidaUnitario = 27.99;
+  
+  const vidaOp2Colaboradores = 148;
+  const vidaOp2Total = 4142.79;
 
-  // Vida: valor unitário fixo de R$ 27,99
-  // const vidaNovo = 1668; // valor total opção 1 (removido do comparativo)
-  const vidaNovo2 = 4142.79; // valor total opção 2
+  // Cálculos
+  const vidaOp1Total = vidaUnitario * vidaOp1Colaboradores;
+  const saudeEconomia = saudeAtual - saudeNovo;
+  const frotaEconomia = frotaAtual - frotaNovo;
+  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual * 12;
+  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + frotaAtual;
+
   // Atualize o comparativo para incluir Vida
   const chartData = [
     { name: "Saúde", atual: saudeAtual, novo: saudeNovo },
     { name: "Frota", atual: frotaAtual, novo: frotaNovo },
-    { name: "Vida", atual: 0, novo: vidaNovo2 },
+    { name: "Vida", atual: 668, novo: vidaOp2Total },
   ];
 
   function formatCurrency(value) {
@@ -33,7 +43,8 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
     });
   }
 
-  useEffect(() => {    async function fetchData() {
+  useEffect(() => {    
+    async function fetchData() {
       setLoading(false);
     }
     fetchData();
@@ -54,7 +65,7 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
   }
 
   // Substitua o componente <Vida /> por:
-  function VidaSection({ vidaNovo, vidaNovo2 }) {
+  function VidaSection() {
     return (
       <motion.div 
         className="section vida"
@@ -65,14 +76,14 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
         <h2 className="section-title">Seguro de Vida</h2>
         <div className="comparison-grid">
           <motion.div className="comparison-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <div className="card-title">👥 Opção 1 - 63 Colaboradores</div>
-            <div className="value-display value-novo">R$ 1.668,00</div>
-            <div>Valor por colaborador: <strong>R$ 27,99</strong></div>
+            <div className="card-title">👥 Opção 1 - {vidaOp1Colaboradores} Colaboradores</div>
+            <div className="value-display value-novo">{formatCurrency(vidaOp1Total)}</div>
+            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitario)}</strong></div>
           </motion.div>
           <motion.div className="comparison-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <div className="card-title">👥 Opção 2 - 148 Colaboradores</div>
-            <div className="value-display value-novo">R$ 4.142,79</div>
-            <div>Valor por colaborador: <strong>R$ 27,99</strong></div>
+            <div className="card-title">👥 Opção 2 - {vidaOp2Colaboradores} Colaboradores</div>
+            <div className="value-display value-novo">{formatCurrency(vidaOp2Total)}</div>
+            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitario)}</strong></div>
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
@@ -88,15 +99,15 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
             <tbody>
               <tr>
                 <td>Opção 1</td>
-                <td>63</td>
-                <td>R$ 1.668,00</td>
-                <td>R$ 27,99</td>
+                <td>{vidaOp1Colaboradores}</td>
+                <td>{formatCurrency(vidaOp1Total)}</td>
+                <td>{formatCurrency(vidaUnitario)}</td>
               </tr>
               <tr>
                 <td>Opção 2</td>
-                <td>148</td>
-                <td>R$ 4.142,79</td>
-                <td>R$ 27,99</td>
+                <td>{vidaOp2Colaboradores}</td>
+                <td>{formatCurrency(vidaOp2Total)}</td>
+                <td>{formatCurrency(vidaUnitario)}</td>
               </tr>
             </tbody>
           </table>
@@ -127,17 +138,17 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
         <h2 className="section-title" style={{ color: '#1a237e' }}>Custos Atuais:</h2>
         <p style={{ fontSize: '1.3rem', color: '#e74c3c' }}>
           A Ultramega já possui os seguintes custos mensais:<br />
-          <span><strong>Ouvidoria:</strong> R$ 1.300,00</span><br />
-          <span><strong>Ginástica Laboral:</strong> R$ 2.500,00</span><br />
-          <span><strong>Saúde Atual:</strong> R$ 59.214,13</span><br />
-          <span><strong>Frota Atual:</strong> R$ 260.050,01</span><br />
+          <span><strong>Ouvidoria:</strong> R$ {ouvidoria.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+          <span><strong>Ginástica Laboral:</strong> R$ {ginasticaLaboral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+          <span><strong>Saúde Atual:</strong> R$ {saudeAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
+          <span><strong>Frota Atual:</strong> R$ {frotaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
           <br />
           <span className="valor-destaque">
-            Custo total atual: <span style={{ color: '#fff', fontWeight: 900 }}>R$ 323.064,14 por ano</span>
+            Custo total atual: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoTotalAtualAno)} por ano</span>
           </span>
           <br/>
           <span className="valor-destaque" style={{ marginTop: 8, border: '1.5px solid #b71c1c' }}>
-            Custo mensal: <span style={{ color: '#fff', fontWeight: 900 }}>R$ 26.922,01</span>
+            Custo mensal: <span style={{ color: '#fff', fontWeight: 900 }}>{formatCurrency(custoMensalAtual)}</span>
           </span>
         </p>
         <p style={{ fontSize: '1.15rem', marginTop: 20 }}>
@@ -186,8 +197,8 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
 
       <div className="chart-section">
         <h2 className="section-title">📊 Comparativo de Valores</h2>
-        <ResponsiveContainer width="100%" height={350}>
-          <BarChart data={chartData}>
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart data={chartData} barCategoryGap={30} barGap={8}>
             <XAxis dataKey="name" stroke={isDark ? "#fff" : "#011147"} />
             <YAxis stroke={isDark ? "#fff" : "#011147"} />
             <Tooltip
@@ -199,8 +210,9 @@ function Dashboard() {  const [loading, setLoading] = useState(true);
                 color: isDark ? "#fff" : "#011147",
               }}
             />
-            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" />
-            <Bar dataKey="novo" fill="#1976d2" name="Valor Novo" />
+            <Legend wrapperStyle={{ fontSize: '1.1rem' }} />
+            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" maxBarSize={60} minPointSize={vidaOp2Total > 0 ? 30 : 20} />
+            <Bar dataKey="novo" fill="#1976d2" name="Valor Novo" maxBarSize={90} minPointSize={vidaOp2Total > 0 ? 50 : 30} />
           </BarChart>
         </ResponsiveContainer>
       </div>

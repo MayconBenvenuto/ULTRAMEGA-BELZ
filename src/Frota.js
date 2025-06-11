@@ -42,7 +42,7 @@ function Frota() {
           <div className="card-title">🚗 Situação Atual</div>
           <div>Veículos: <strong>37</strong></div>
           <div>Seguradora: <strong>Bradesco</strong></div>
-          <div className="value-display value-atual">{formatCurrency(frotaAtual)}</div>
+          <div className="value-display value-atual">{formatCurrency(frotaAtual)} anualmente</div>
         </motion.div>
         <motion.div 
           className="comparison-card"
@@ -53,7 +53,7 @@ function Frota() {
           <div>Veículos: <strong>37</strong></div>
           <div>Tokio: <strong>{formatCurrency(tokioValor)}</strong></div>
           <div>Allianz: <strong>{formatCurrency(allianzValor)}</strong></div>
-          <div className="value-display value-novo">{formatCurrency(frotaNovo)}</div>
+          <div className="value-display value-novo">{formatCurrency(frotaNovo)} anualmente</div>
         </motion.div>
       </div>
 
@@ -63,8 +63,16 @@ function Frota() {
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        Economia anual: {formatCurrency(frotaEconomia)}
-        Economia mensal: {formatCurrency(frotaEconomia / 12)}
+        Economia anual de: {formatCurrency(frotaEconomia)}
+      </motion.div>
+
+      <motion.div 
+        className={frotaEconomia > 0 ? "difference" : "difference negative"}
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        Economia mensal de: {formatCurrency(frotaEconomia / 12)}
       </motion.div>
     </motion.div>
   );
