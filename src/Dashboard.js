@@ -183,25 +183,19 @@ function Dashboard() {
         <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, background: 'radial-gradient(circle at 10% 90%, #1976d2aa, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
         {/* Coluna texto */}
         <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-          <h2 className="section-title" style={{ color: '#fff', fontSize: '2.7rem', letterSpacing: 1.5, fontWeight: 900, marginBottom: 18, textShadow: '0 4px 24px #011147cc', display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center', textAlign: 'center' }}>
-            Belz Conecta Saúde
-          </h2>
-          <p style={{ fontSize: '1.35rem', color: '#e3eafc', fontWeight: 400, lineHeight: 1.7, marginBottom: 22, textShadow: '0 2px 8px #01114788', maxWidth: 540, textAlign: 'center', alignSelf: 'center' }}>
+          {/* SVG ilustração saúde moderna */}
+          <img 
+                src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
+                alt="Logo Conecta Saúde" 
+                style={{ height: 220, width: 250, marginRight: 6, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />
+          <p style={{ fontSize: '1.15rem', color: '#e3eafc', fontWeight: 400, lineHeight: 1.7, marginBottom: 22, textShadow: '0 2px 8px #01114788', textAlign: 'center', alignSelf: 'center' }}>
             O <strong style={{ color: '#fff', background: '#1976d2', padding: '4px 18px', borderRadius: 12, fontSize: '1.15em', fontWeight: 900, boxShadow: '0 2px 12px #01114733', letterSpacing: 1 }}>Belz Conecta Saúde</strong> é uma solução premium para gestão e acompanhamento da saúde dos colaboradores, com plataforma exclusiva, suporte especializado e atendimento à NR-1. Eleva o padrão de cuidado e eficiência para sua empresa.
           </p>
           <span style={{ display: 'inline-block', background: 'linear-gradient(90deg, #fff 60%, #e3eafc 100%)', color: '#011147', fontWeight: 900, padding: '18px 44px', borderRadius: 22, fontSize: '2.1rem', margin: '10px 0', boxShadow: '0 4px 24px #01114722', letterSpacing: 1.5, border: '2.5px solid #fff', textShadow: '0 2px 8px #fff8', boxSizing: 'border-box', minWidth: 220, textAlign: 'center' }}>
             Investimento: R$ 14.976,00
           </span>
-        </div>
-        {/* Coluna ilustração moderna */}
-        <div style={{ flex: 1, minWidth: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1, position: 'relative', padding: '32px 32px 32px 0' }}>
-          {/* SVG ilustração saúde moderna */}
-          <img 
-                src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
-                alt="Logo Conecta Saúde" 
-                style={{ height: 220, width: 250, marginRight: 6, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' }} 
-                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />
         </div>
       </motion.div>
 
