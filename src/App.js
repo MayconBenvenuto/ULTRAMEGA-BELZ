@@ -20,6 +20,14 @@ function AppContent() {
       transition={{ duration: 0.5 }}
     >
       <div className="header">
+
+        <img 
+            src={process.env.PUBLIC_URL + '/ultramega.png?v=1'} 
+            alt="Logo Conecta Saúde" 
+            style={{ height: 'auto', width: 150, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />
+
         <h1
           style={{
             display: "inline-block",
@@ -29,6 +37,12 @@ function AppContent() {
         >
           ULTRAMEGA - BELZ SEGUROS
         </h1>
+        <img 
+            src={process.env.PUBLIC_URL + '/belz.png?v=1'} 
+            alt="Logo Conecta Saúde" 
+            style={{ height: 'auto', width: 150, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />
         <p>Análise detalhada das propostas da Belz Corretora de Seguros</p>
         <ThemeToggle />
       </div>
