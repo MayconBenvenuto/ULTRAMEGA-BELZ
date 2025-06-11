@@ -62,56 +62,214 @@ function Dashboard() {
   // Substitua o componente <Vida /> por:
   function VidaSection() {
     // Dados fixos para exibição
-    const vidaColaboradoresAtual = 24; // Exemplo, ajuste se necessário
+    const vidaColaboradoresAtual = 63; // Exemplo, ajuste se necessário
     const vidaColaboradoresBelz = 148; // Exemplo, ajuste se necessário
-    const vidaUnitarioAtual = vidaAtual / vidaColaboradoresAtual;
-    const vidaUnitarioBelz = vidaNovo / vidaColaboradoresBelz;
+    const vidaUnitarioAtual = 27.99;
+    const vidaUnitarioBelz = 27.99;
     return (
-      <motion.div 
-        className="section vida"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+      <motion.div
+      className="section vida"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      style={{
+        background: isDark
+        ? "linear-gradient(120deg, #011147 60%, #1976d2 100%)"
+        : "linear-gradient(120deg, #1976d2 60%, #42a5f5 100%)",
+        color: "#fff",
+        borderRadius: 28,
+        boxShadow: "0 4px 32px #01114733",
+        padding: "36px 24px 32px 24px",
+        margin: "32px 0 24px 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
       >
-        <h2 className="section-title">Seguro de Vida</h2>
-        <div className="comparison-grid">
-          <motion.div className="comparison-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <div className="card-title">👥 Atual - {vidaColaboradoresAtual} Colaboradores</div>
-            <div className="value-display value-novo">{formatCurrency(vidaAtual)}</div>
-            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioAtual)}</strong></div>
-          </motion.div>
-          <motion.div className="comparison-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <div className="card-title">👥 Belz - {vidaColaboradoresBelz} Colaboradores</div>
-            <div className="value-display value-novo">{formatCurrency(vidaNovo)}</div>
-            <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioBelz)}</strong></div>
-          </motion.div>
+      {/* Decoração de fundo */}
+      <div
+        style={{
+        position: "absolute",
+        top: -40,
+        right: -40,
+        width: 180,
+        height: 180,
+        background: "radial-gradient(circle at 80% 20%, #fff3, transparent 80%)",
+        zIndex: 0,
+        filter: "blur(2px)",
+        }}
+      />
+      <div
+        style={{
+        position: "absolute",
+        bottom: -30,
+        left: -30,
+        width: 120,
+        height: 120,
+        background: "radial-gradient(circle at 10% 90%, #fff2, transparent 80%)",
+        zIndex: 0,
+        filter: "blur(2px)",
+        }}
+      />
+
+      <h2
+        className="section-title"
+        style={{
+        color: "#fff",
+        fontWeight: 900,
+        fontSize: "2.2rem",
+        letterSpacing: 0.5,
+        marginBottom: 18,
+        textShadow: "0 2px 12px #01114755",
+        textAlign: "center",
+        }}
+      >
+        <span role="img" aria-label="shield" style={{ marginRight: 10 }}>
+        🛡️
+        </span>
+        Seguro de Vida
+      </h2>
+      <div
+        className="comparison-grid"
+        style={{
+        display: "flex",
+        gap: 32,
+        justifyContent: "center",
+        alignItems: "stretch",
+        margin: "0 auto 18px auto",
+        flexWrap: "wrap",
+        }}
+      >
+        <motion.div
+        className="comparison-card"
+        whileHover={{ scale: 1.04, boxShadow: "0 8px 32px #fff5" }}
+        transition={{ type: "spring", stiffness: 300 }}
+        style={{
+          background: "rgba(255,255,255,0.10)",
+          borderRadius: 18,
+          padding: "28px 32px",
+          minWidth: 240,
+          boxShadow: "0 2px 12px #01114722",
+          border: "2.5px solid #fff6",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          zIndex: 2,
+        }}
+        >
+        <div
+          className="card-title"
+          style={{
+          fontWeight: 700,
+          fontSize: "1.25rem",
+          marginBottom: 10,
+          color: "#fff",
+          textAlign: "center",
+          }}
+        >
+          👥 Opção 1
+          <br />
+          <span style={{ fontSize: "1.1rem", fontWeight: 400 }}>
+          {vidaColaboradoresAtual} colaboradores
+          </span>
         </div>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
-          <table className="summary-table">
-            <thead>
-              <tr>
-                <th>Condição</th>
-                <th>Colaboradores</th>
-                <th>Valor Total</th>
-                <th>Valor Unitário</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Atual</td>
-                <td>{vidaColaboradoresAtual}</td>
-                <td>{formatCurrency(vidaAtual)}</td>
-                <td>{formatCurrency(vidaUnitarioAtual)}</td>
-              </tr>
-              <tr>
-                <td>Belz</td>
-                <td>{vidaColaboradoresBelz}</td>
-                <td>{formatCurrency(vidaNovo)}</td>
-                <td>{formatCurrency(vidaUnitarioBelz)}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div
+          className="value-display value-atual"
+          style={{
+          fontSize: "2.1rem",
+          fontWeight: 900,
+          color: "#ffd600",
+          margin: "10px 0 6px 0",
+          textShadow: "0 2px 8px #01114744",
+          }}
+        >
+          {formatCurrency(vidaUnitarioAtual*vidaColaboradoresAtual)}
+        </div>
+        <div style={{ fontSize: "1.1rem", color: "#fff" }}>
+          Valor por colaborador:{" "}
+          <strong style={{ color: "#ffd600" }}>
+          {formatCurrency(vidaUnitarioAtual)}
+          </strong>
+        </div>
         </motion.div>
+        <motion.div
+        className="comparison-card"
+        whileHover={{ scale: 1.04, boxShadow: "0 8px 32px #fff5" }}
+        transition={{ type: "spring", stiffness: 300 }}
+        style={{
+          background: "rgba(255,255,255,0.10)",
+          borderRadius: 18,
+          padding: "28px 32px",
+          minWidth: 240,
+          boxShadow: "0 2px 12px #01114722",
+          border: "2.5px solid #fff6",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          zIndex: 2,
+        }}
+        >
+        <div
+          className="card-title"
+          style={{
+          fontWeight: 700,
+          fontSize: "1.25rem",
+          marginBottom: 10,
+          color: "#fff",
+          textAlign: "center",
+          }}
+        >
+          👥 Opção 2
+          <br />
+          <span style={{ fontSize: "1.1rem", fontWeight: 400 }}>
+          {vidaColaboradoresBelz} colaboradores
+          </span>
+        </div>
+        <div
+          className="value-display value-novo"
+          style={{
+          fontSize: "2.1rem",
+          fontWeight: 900,
+          color: "#00e676",
+          margin: "10px 0 6px 0",
+          textShadow: "0 2px 8px #01114744",
+          }}
+        >
+          {formatCurrency(vidaNovo)}
+        </div>
+        <div style={{ fontSize: "1.1rem", color: "#fff" }}>
+          Valor por colaborador:{" "}
+          <strong style={{ color: "#00e676" }}>
+          {formatCurrency(vidaUnitarioBelz)}
+          </strong>
+        </div>
+        </motion.div>
+      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        style={{
+        background: "rgba(255,255,255,0.13)",
+        color: "#fff",
+        borderRadius: 12,
+        padding: "14px 22px",
+        margin: "18px auto 0 auto",
+        fontSize: "1.15rem",
+        fontWeight: 500,
+        boxShadow: "0 2px 8px #01114722",
+        maxWidth: 420,
+        textAlign: "center",
+        zIndex: 2,
+        }}
+      >
+        <span style={{ color: "#ffd600", fontWeight: 700 }}>
+        Custo Atual:
+        </span>{" "}
+        {vidaColaboradoresAtual} vidas{" "}
+        <span style={{ color: "#ffd600", fontWeight: 700 }}>
+        {formatCurrency(vidaAtual)}
+        </span>
+      </motion.div>
       </motion.div>
     );
   }
@@ -183,12 +341,12 @@ function Dashboard() {
         <div style={{ position: 'absolute', top: -60, right: -60, width: 320, height: 320, background: 'radial-gradient(circle at 80% 20%, #fff3, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
         <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, background: 'radial-gradient(circle at 10% 90%, #1976d2aa, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
         {/* Coluna texto */}
-        <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-          <img 
-                src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
-                alt="Logo Conecta Saúde" 
-                style={{ height: 220, width: 250, marginRight: 6, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
-                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+          <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+            <img 
+            src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
+            alt="Logo Conecta Saúde" 
+            style={{ height: 'auto', width: 300, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
               />
 
               <img 
@@ -213,10 +371,11 @@ function Dashboard() {
               <style>{`
                 @media (max-width: 600px) {
                   .proposta-belz-img {
-                    max-width: 98vw !important;
+                    max-width: 88vw !important;
                     min-width: 0 !important;
-                    width: 98vw !important;
+                    width: 88vw !important;
                     height: auto !important;
+                    margin: 0 auto !important;
                   }
                 }
               `}</style>          
