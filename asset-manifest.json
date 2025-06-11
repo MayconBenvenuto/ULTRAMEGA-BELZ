@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ULTRAMEGA-BELZ/static/css/main.0bff4f13.css",
-    "main.js": "/ULTRAMEGA-BELZ/static/js/main.0d50a600.js",
+    "main.css": "/ULTRAMEGA-BELZ/static/css/main.acccb0f3.css",
+    "main.js": "/ULTRAMEGA-BELZ/static/js/main.0c81a3f0.js",
     "workbox-a9b69da8.js.map": "/ULTRAMEGA-BELZ/workbox-a9b69da8.js.map",
     "workbox-a9b69da8.js": "/ULTRAMEGA-BELZ/workbox-a9b69da8.js",
     "service-worker.js.map": "/ULTRAMEGA-BELZ/service-worker.js.map",
     "service-worker.js": "/ULTRAMEGA-BELZ/service-worker.js",
     "index.html": "/ULTRAMEGA-BELZ/index.html",
-    "main.0bff4f13.css.map": "/ULTRAMEGA-BELZ/static/css/main.0bff4f13.css.map",
-    "main.0d50a600.js.map": "/ULTRAMEGA-BELZ/static/js/main.0d50a600.js.map"
+    "main.acccb0f3.css.map": "/ULTRAMEGA-BELZ/static/css/main.acccb0f3.css.map",
+    "main.0c81a3f0.js.map": "/ULTRAMEGA-BELZ/static/js/main.0c81a3f0.js.map"
   },
   "entrypoints": [
-    "static/css/main.0bff4f13.css",
-    "static/js/main.0d50a600.js"
+    "static/css/main.acccb0f3.css",
+    "static/js/main.0c81a3f0.js"
   ]
 }
