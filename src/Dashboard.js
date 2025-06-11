@@ -74,8 +74,8 @@ function Dashboard() {
       transition={{ duration: 0.5, delay: 0.2 }}
       style={{
         background: isDark
-        ? "linear-gradient(120deg, #011147 60%, #1976d2 100%)"
-        : "linear-gradient(120deg, #1976d2 60%, #42a5f5 100%)",
+        ? "linear-gradient(120deg, #011147 60%, #011147 100%)"
+        : "linear-gradient(120deg, #011147 60%, #42a5f5 100%)",
         color: "#fff",
         borderRadius: 28,
         boxShadow: "0 4px 32px #01114733",
@@ -93,7 +93,7 @@ function Dashboard() {
         right: -40,
         width: 180,
         height: 180,
-        background: "radial-gradient(circle at 80% 20%, #fff3, transparent 80%)",
+        background: "radial-gradient(circle at 80% 20%, #011147, transparent 80%)",
         zIndex: 0,
         filter: "blur(2px)",
         }}
@@ -262,13 +262,16 @@ function Dashboard() {
         zIndex: 2,
         }}
       >
-        <span style={{ color: "#ffd600", fontWeight: 700 }}>
-        Custo Atual:
-        </span>{" "}
-        {vidaColaboradoresAtual} vidas{" "}
-        <span style={{ color: "#ffd600", fontWeight: 700 }}>
-        {formatCurrency(vidaAtual)}
-        </span>
+        <div style={{fontWeight: 700, fontSize: "1.8rem" }}>
+          <span style={{ color: "#ffd600", fontWeight: 700 }}>
+          Custo Atual:
+          </span>{" "}
+          <br/>
+          {33} vidas{" "}
+          <span style={{ color: "#ffd600", fontWeight: 700 }}>
+          {formatCurrency(vidaAtual)}
+          </span>
+        </div>
       </motion.div>
       </motion.div>
     );
