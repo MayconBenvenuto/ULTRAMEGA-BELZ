@@ -1,20 +1,9 @@
 import { motion } from "framer-motion";
-import { useTheme } from "./ThemeContext";
+import Card from "./components/Card";
 
-function Frota() {
-  const { isDark } = useTheme();
-  const frotaAtual = 260050.01;
-  const tokioValor = 15800.03;
-  const allianzValor = 206507.71;
+function Frota({ frotaAtual, tokioValor, allianzValor }) {
   const frotaNovo = tokioValor + allianzValor;
   const frotaEconomia = frotaAtual - frotaNovo;
-
-  const data = [
-    { name: 'Tokio', value: tokioValor },
-    { name: 'Allianz', value: allianzValor }
-  ];
-
-  const COLORS = ['#3498db', '#e67e22'];
 
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
@@ -32,27 +21,19 @@ function Frota() {
     >
       <h2 className="section-title">Seguro de Frota</h2>
       <div className="comparison-grid">
-        <motion.div 
-          className="comparison-card"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
+        <Card>
           <div className="card-title">🚗 Situação Atual</div>
           <div>Veículos: <strong>37</strong></div>
           <div>Seguradora: <strong>Bradesco</strong></div>
           <div className="value-display value-atual">{formatCurrency(frotaAtual)} anualmente</div>
-        </motion.div>
-        <motion.div 
-          className="comparison-card"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
+        </Card>
+        <Card>
           <div className="card-title">🚗 Nova Proposta Belz</div>
           <div>Veículos: <strong>37</strong></div>
           <div>Tokio: <strong>{formatCurrency(tokioValor)}</strong></div>
           <div>Allianz: <strong>{formatCurrency(allianzValor)}</strong></div>
           <div className="value-display value-novo">{formatCurrency(frotaNovo)} anualmente</div>
-        </motion.div>
+        </Card>
       </div>
 
       <motion.div 

@@ -3,33 +3,42 @@ import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import Saude from "./Saude";
 import Frota from "./Frota";
+import Vida from "./Vida";
 import { useTheme } from "./ThemeContext";
 
-function Dashboard() {  
+function Dashboard() {
   const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
 
-  // NOVOS VALORES ATUALIZADOS (conforme solicitado)
-  // Custos atuais Ultramega
+  // Centralização dos valores principais
+  // Saúde
+  const saudeAtual = 59214.13;
+  const saudeNovo = 47100.53;
+  // Frota
+  const frotaAtual = 260050.01;
+  const tokioValor = 15800.03;
+  const allianzValor = 206507.71;
+  const frotaNovo = tokioValor + allianzValor;
+
+  // Economia
+  const economiaSaudeAnual = (saudeAtual - saudeNovo) * 12;
+  const economiaFrotaAnual = frotaAtual - frotaNovo;
+  const economiaAnualCorreta = economiaSaudeAnual + economiaFrotaAnual;
+  const economiaMensalCorreta = economiaAnualCorreta / 12;
+
+  // Valores para Vida
+  const vidaColaboradoresAtual = 63;
+  const vidaColaboradoresNovo = 148;
+  const vidaAtual = 1668; // valor total opção 1
+  const vidaNovo = 4142.79; // valor total opção 2
+  const vidaUnitarioAtual = vidaAtual / vidaColaboradoresAtual;
+  const vidaUnitarioNovo = vidaNovo / vidaColaboradoresNovo;
+  // Custos extras
   const ouvidoria = 1300.00;
   const ginasticaLaboral = 2500.00;
-  const saudeAtual = 59214.13;
-  const frotaAtual = 21670.83;
-  const vidaAtual = 668.80;
-  const custoMensalAtual = ouvidoria+ginasticaLaboral+saudeAtual+frotaAtual+vidaAtual; // valor informado
-  const custoTotalAtualAno = custoMensalAtual * 12; // valor informado
-
-  // Proposta Belz
-  const saudeNovo = 47100.00;
-  const vidaNovo = 4142.79;
-  const frotaNovo = 18525.64;
-  const conectaSaude = 14976.00;
-  const custoMensalBelz = 84744.43; // valor informado
-  const custoTotalBelzAno = 1016933.16; // valor informado
-
-  // Cálculo da economia
-  const economiaMensal = custoMensalAtual - custoMensalBelz;
-  const economiaAnual = custoTotalAtualAno - custoTotalBelzAno;
+  // Custos totais
+  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + frotaAtual + vidaAtual;
+  const custoTotalAtualAno = custoMensalAtual * 12;
 
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
@@ -38,7 +47,7 @@ function Dashboard() {
     });
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     async function fetchData() {
       setLoading(false);
     }
@@ -59,224 +68,6 @@ function Dashboard() {
     );
   }
 
-  // Substitua o componente <Vida /> por:
-  function VidaSection() {
-    // Dados fixos para exibição
-    const vidaColaboradoresAtual = 63; // Exemplo, ajuste se necessário
-    const vidaColaboradoresBelz = 148; // Exemplo, ajuste se necessário
-    const vidaUnitarioAtual = 27.99;
-    const vidaUnitarioBelz = 27.99;
-    return (
-      <motion.div
-      className="section vida"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      style={{
-        background: isDark
-        ? "linear-gradient(120deg, #011147 60%, #011147 100%)"
-        : "linear-gradient(120deg, #011147 60%, #42a5f5 100%)",
-        color: "#fff",
-        borderRadius: 28,
-        boxShadow: "0 4px 32px #01114733",
-        padding: "36px 24px 32px 24px",
-        margin: "32px 0 24px 0",
-        position: "relative",
-        overflow: "hidden",
-      }}
-      >
-      {/* Decoração de fundo */}
-      <div
-        style={{
-        position: "absolute",
-        top: -40,
-        right: -40,
-        width: 180,
-        height: 180,
-        background: "radial-gradient(circle at 80% 20%, #011147, transparent 80%)",
-        zIndex: 0,
-        filter: "blur(2px)",
-        }}
-      />
-      <div
-        style={{
-        position: "absolute",
-        bottom: -30,
-        left: -30,
-        width: 120,
-        height: 120,
-        background: "radial-gradient(circle at 10% 90%, #fff2, transparent 80%)",
-        zIndex: 0,
-        filter: "blur(2px)",
-        }}
-      />
-
-      <h2
-        className="section-title"
-        style={{
-        color: "#fff",
-        fontWeight: 900,
-        fontSize: "2.2rem",
-        letterSpacing: 0.5,
-        marginBottom: 18,
-        textShadow: "0 2px 12px #01114755",
-        textAlign: "center",
-        }}
-      >
-        <span role="img" aria-label="shield" style={{ marginRight: 10 }}>
-        🛡️
-        </span>
-        Seguro de Vida
-      </h2>
-      <div
-        className="comparison-grid"
-        style={{
-        display: "flex",
-        gap: 32,
-        justifyContent: "center",
-        alignItems: "stretch",
-        margin: "0 auto 18px auto",
-        flexWrap: "wrap",
-        }}
-      >
-        <motion.div
-        className="comparison-card"
-        whileHover={{ scale: 1.04, boxShadow: "0 8px 32px #fff5" }}
-        transition={{ type: "spring", stiffness: 300 }}
-        style={{
-          background: "rgba(255,255,255,0.10)",
-          borderRadius: 18,
-          padding: "28px 32px",
-          minWidth: 240,
-          boxShadow: "0 2px 12px #01114722",
-          border: "2.5px solid #fff6",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          zIndex: 2,
-        }}
-        >
-        <div
-          className="card-title"
-          style={{
-          fontWeight: 700,
-          fontSize: "1.95rem",
-          marginBottom: 10,
-          color: "#fff",
-          textAlign: "center",
-          }}
-        >
-          👥 Opção 1
-          <br />
-          <span style={{ fontSize: "1.6rem", fontWeight: 400 }}>
-          {vidaColaboradoresAtual} vidas
-          </span>
-        </div>
-        <div
-          className="value-display value-atual"
-          style={{
-          fontSize: "2.1rem",
-          fontWeight: 900,
-          color: "#ffd600",
-          margin: "10px 0 6px 0",
-          textShadow: "0 2px 8px #01114744",
-          }}
-        >
-          {formatCurrency(vidaUnitarioAtual*vidaColaboradoresAtual)}
-        </div>
-        <div style={{ fontSize: "1.1rem", color: "#fff" }}>
-          Valor por colaborador:{" "}
-          <strong style={{ color: "#ffd600" }}>
-          {formatCurrency(vidaUnitarioAtual)}
-          </strong>
-        </div>
-        </motion.div>
-        <motion.div
-        className="comparison-card"
-        whileHover={{ scale: 1.04, boxShadow: "0 8px 32px #fff5" }}
-        transition={{ type: "spring", stiffness: 300 }}
-        style={{
-          background: "rgba(255,255,255,0.10)",
-          borderRadius: 18,
-          padding: "28px 32px",
-          minWidth: 240,
-          boxShadow: "0 2px 12px #01114722",
-          border: "2.5px solid #fff6",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          zIndex: 2,
-        }}
-        >
-        <div
-          className="card-title"
-          style={{
-          fontWeight: 700,
-          fontSize: "1.95rem",
-          marginBottom: 10,
-          color: "#fff",
-          textAlign: "center",
-          }}
-        >
-          👥 Opção 2
-          <br />
-          <span style={{ fontSize: "1.6rem", fontWeight: 400 }}>
-          {vidaColaboradoresBelz} vidas
-          </span>
-        </div>
-        <div
-          className="value-display value-novo"
-          style={{
-          fontSize: "2.1rem",
-          fontWeight: 900,
-          color: "#00e676",
-          margin: "10px 0 6px 0",
-          textShadow: "0 2px 8px #01114744",
-          }}
-        >
-          {formatCurrency(vidaNovo)}
-        </div>
-        <div style={{ fontSize: "1.1rem", color: "#fff" }}>
-          Valor por colaborador:{" "}
-          <strong style={{ color: "#00e676" }}>
-          {formatCurrency(vidaUnitarioBelz)}
-          </strong>
-        </div>
-        </motion.div>
-      </div>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        style={{
-        background: "rgba(255,255,255,0.13)",
-        color: "#fff",
-        borderRadius: 12,
-        padding: "14px 22px",
-        margin: "18px auto 0 auto",
-        fontSize: "1.15rem",
-        fontWeight: 500,
-        boxShadow: "0 2px 8px #01114722",
-        maxWidth: 420,
-        textAlign: "center",
-        zIndex: 2,
-        }}
-      >
-        <div style={{fontWeight: 700, fontSize: "2.4rem" }}>
-          <span style={{ color: "#FF4500", fontWeight: 700 }}>
-          Custo Atual:
-          </span>{" "}
-          <br/>
-          {33} vidas{" "}
-          <span style={{ color: "#FF4500", fontWeight: 700 }}>
-          {formatCurrency(vidaAtual)}
-          </span>
-        </div>
-      </motion.div>
-      </motion.div>
-    );
-  }
-
   return (
     <motion.div
       className="dashboard"
@@ -284,37 +75,126 @@ function Dashboard() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Saude />
-      <VidaSection />
-      <Frota />
+      <Saude saudeAtual={saudeAtual} saudeNovo={saudeNovo} />
+      <Vida 
+        vidaAtual={vidaAtual}
+        vidaNovo={vidaNovo}
+        vidaColaboradoresAtual={vidaColaboradoresAtual}
+        vidaColaboradoresNovo={vidaColaboradoresNovo}
+        vidaUnitarioAtual={vidaUnitarioAtual}
+        vidaUnitarioNovo={vidaUnitarioNovo}
+      />
+      <Frota frotaAtual={frotaAtual} tokioValor={tokioValor} allianzValor={allianzValor} />
 
-      {/* Seção Custos Atuais - movida para logo após Frota */}
+      {/* Seção Custos Atuais - Design Elegante Azul Escuro */}
+<motion.div
+  className="section ultramega-custos-container"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 1 }}
+>
+  {/* Padrão geométrico de fundo */}
+  <div className="ultramega-custos-pattern-bg" />
+  
+  <div className="ultramega-custos-content">
+    {/* Header da seção */}
+    <div className="ultramega-custos-header">
+      
+      <h2 className="ultramega-custos-title">
+        Custos Atuais Mensais
+      </h2>
+    </div>
+    
+    {/* Cards de custos em layout mais limpo */}
+    <div className="ultramega-custos-grid">
+      {[
+        { label: 'Ouvidoria', valor: ouvidoria, icon: '🎧', color: '#FF0000' },
+        { label: 'Ginástica Laboral', valor: ginasticaLaboral, icon: '💪', color: '#FF0000' },
+        { label: 'Saúde Atual', valor: saudeAtual, icon: '⚕️', color: '#FF0000' },
+        { label: 'Frota Atual', valor: frotaAtual, icon: '🚙', color: '#FF0000' },
+        { label: 'Vida', valor: vidaAtual, icon: '🛡️', color: '#FF0000' }
+      ].map((item, index) => (
         <motion.div
-          className="section ultramega-custos"
-          initial={{ opacity: 0, y: 20 }}
+          className="ultramega-custo-card"
+          key={item.label}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          style={{ marginTop: 30, borderLeftColor: '#1a237e', background: '#f5f7fa', color: '#1a237e', fontWeight: 600 }}
+          transition={{ duration: 0.5, delay: 0.1 * index }}
+          whileHover={{ y: -5, transition: { duration: 0.2 } }}
         >
-          <h2 className="section-title" style={{ color: '#1a237e' }}>Custos Atuais:</h2>
-          <p style={{ fontSize: '1.4rem', color: '#e74c3c' }}>
-            A Ultramega já possui os seguintes custos mensais:<br />
-            <span><strong>Ouvidoria:</strong> R$ {ouvidoria.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <span><strong>Ginástica Laboral:</strong> R$ {ginasticaLaboral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <span><strong>Saúde Atual:</strong> R$ {saudeAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <span><strong>Frota Atual:</strong> R$ {frotaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <span><strong>Vida:</strong> R$ {vidaAtual.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br />
-            <br />
-            <span className="valor-destaque">
-          Custo Anual: <span style={{ color: '#fff', fontWeight: 900,'fontSize': '1.8rem' }}>{formatCurrency(custoTotalAtualAno)}</span>
-            </span>
-            <br/>
-            <span className="valor-destaque" style={{ marginTop: 8, border: '1.5px solid #b71c1c' }}>
-          Custo Mensal: <span style={{ color: '#fff', fontWeight: 900,'fontSize': '1.8rem' }}>{formatCurrency(custoMensalAtual)}</span>
-            </span>
-          </p>
-         
+          <div className="ultramega-custo-card-header">
+            <div 
+              className="ultramega-custo-card-icon-wrapper"
+              style={{ background: `linear-gradient(135deg, ${item.color}, ${item.color}dd)`, boxShadow: `0 8px 20px ${item.color}40` }}
+            >
+              {item.icon}
+            </div>
+            <div>
+              <div className="ultramega-custo-card-label">
+                {item.label}
+              </div>
+            </div>
+          </div>
+          
+          <div className="ultramega-custo-card-value">
+            R$ {item.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+          </div>
         </motion.div>
+      ))}
+    </div>
+
+    {/* Linha divisória elegante */}
+    <div className="ultramega-custos-divider" />
+
+    {/* Seção de totais com layout horizontal */}
+    <div className="ultramega-custos-totals-grid">
+      {/* Total Mensal */}
+      <motion.div
+        className="ultramega-total-card ultramega-total-card-mensal"
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+      >
+        <div className="ultramega-total-card-decoration right" />
+        
+        <div className="ultramega-total-card-label-text">
+          Custo Mensal
+        </div>
+        <div className="ultramega-total-card-value-text">
+          {formatCurrency(custoMensalAtual)}
+        </div>
+      </motion.div>
+
+      {/* Multiplicador */}
+      <motion.div
+        className="ultramega-custos-multiplier"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 1.2 }}
+      >
+        <span className="operator">×</span>
+        <span className="number">12</span>
+      </motion.div>
+
+      {/* Total Anual */}
+      <motion.div
+        className="ultramega-total-card ultramega-total-card-anual"
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
+      >
+        <div className="ultramega-total-card-decoration left" />
+        
+        <div className="ultramega-total-card-label-text">
+          Custo Anual
+        </div>
+        <div className="ultramega-total-card-value-text">
+          {formatCurrency(custoTotalAtualAno)}
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</motion.div>
 
       {/* Seção Belz Conecta Saúde + Proposta Belz */}
       <motion.div
@@ -435,10 +315,10 @@ function Dashboard() {
             width: '100%',
             maxWidth: 420
           }}>
-            Economia estimada por MÊS: {formatCurrency(economiaMensal)}
+            Economia estimada por MÊS: {formatCurrency(economiaMensalCorreta)}
           </span>
         </p>
-        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>Economia estimada por ANO: {formatCurrency(economiaAnual)}</div>
+        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>Economia estimada por ANO: {formatCurrency(economiaAnualCorreta)}</div>
         <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
       </motion.div>
     </motion.div>

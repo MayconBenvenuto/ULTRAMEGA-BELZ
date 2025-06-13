@@ -1,9 +1,8 @@
 import React from "react";
+import Card from "./components/Card";
 import { motion } from "framer-motion";
 
-function Saude() {
-  const saudeAtual = 59214.13;
-  const saudeNovo = 47100.53;
+function Saude({ saudeAtual, saudeNovo }) {
   const saudeEconomia = saudeAtual - saudeNovo;
 
   function formatCurrency(value) {
@@ -22,26 +21,18 @@ function Saude() {
     >
       <h2 className="section-title">Seguro Saúde</h2>
       <div className="comparison-grid">
-        <motion.div 
-          className="comparison-card"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
+        <Card>
           <div className="card-title">📋 Situação Atual</div>
           <div>Seguradora: <strong>SulAmérica/Hapvida</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-atual">{formatCurrency(saudeAtual)}</div>
-        </motion.div>
-        <motion.div 
-          className="comparison-card"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
+        </Card>
+        <Card>
           <div className="card-title">✨Com A Nova Proposta <strong>Belz</strong></div>
-          <div>Seguradora: <strong>Unimed/Bradesco</strong></div>
+          <div>Seguradora: <strong>Bradesco/Unimed</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-novo">{formatCurrency(saudeNovo)}</div>
-        </motion.div>
+        </Card>
       </div>
       <motion.div 
         className={saudeEconomia > 0 ? "difference" : "difference negative"}

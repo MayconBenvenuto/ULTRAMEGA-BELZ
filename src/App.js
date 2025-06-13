@@ -4,11 +4,6 @@ import Dashboard from "./Dashboard";
 import { ThemeProvider, useTheme } from "./ThemeContext";
 import "./App.css";
 
-function ThemeToggle() {
-  const { isDark, toggleTheme } = useTheme();
-  return 
-}
-
 function AppContent() {
   const { isDark } = useTheme();
 
@@ -20,31 +15,26 @@ function AppContent() {
       transition={{ duration: 0.5 }}
     >
       <div className="header">
-
         <img 
-            src={process.env.PUBLIC_URL + '/ultramega.png?v=1'} 
-            alt="Logo Conecta Saúde" 
-            style={{ height: 'auto', width: 150, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
-            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />
-
-        <h1
-          style={{
-            display: "inline-block",
-            verticalAlign: "middle",
-            margin: 0,
-          }}
-        >
-          ULTRAMEGA - BELZ SEGUROS
-        </h1>
+          src={process.env.PUBLIC_URL + '/ultramega.png?v=1'} 
+          alt="Logo Ultramega" 
+          className="header-logo"
+          style={{ width: 150, height: 'auto', borderRadius: 8, boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' }}
+          onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+        />
+        <div className="header-center">
+          <h1 style={{ display: 'inline-block', verticalAlign: 'middle', margin: 0 }}>
+            ULTRAMEGA - BELZ SEGUROS
+          </h1>
+          <p>Análise detalhada das propostas da Belz Corretora de Seguros</p>
+        </div>
         <img 
-            src={process.env.PUBLIC_URL + '/belz.png?v=1'} 
-            alt="Logo Conecta Saúde" 
-            style={{ height: 'auto', width: 150, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
-            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />
-        <p>Análise detalhada das propostas da Belz Corretora de Seguros</p>
-        <ThemeToggle />
+          src={process.env.PUBLIC_URL + '/belz.png?v=1'} 
+          alt="Logo Belz" 
+          className="header-logo"
+          style={{ width: 150, height: 'auto', borderRadius: 8, boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' }}
+          onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/ultramega.png'; }}
+        />
       </div>
       <Dashboard />
     </motion.div>

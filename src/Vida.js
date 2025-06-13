@@ -1,16 +1,15 @@
 import React from "react";
+import Card from "./components/Card";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTheme } from "./ThemeContext";
 
-function Vida() {
+function Vida({ vidaAtual, vidaNovo, vidaColaboradoresAtual, vidaColaboradoresNovo, vidaUnitarioAtual, vidaUnitarioNovo }) {
   const { isDark } = useTheme();
-  const vidaUnitario1 = 1668 / 63;
-  const vidaUnitario2 = 4142.79 / 148;
 
   const data = [
-    { name: 'Opção 1', colaboradores: 63, valorTotal: 1763.37, valorUnitario: vidaUnitario1 },
-    { name: 'Opção 2', colaboradores: 148, valorTotal: 4142.79, valorUnitario: vidaUnitario2 }
+    { name: 'Opção 1', colaboradores: vidaColaboradoresAtual, valorTotal: vidaAtual, valorUnitario: vidaUnitarioAtual },
+    { name: 'Opção 2', colaboradores: vidaColaboradoresNovo, valorTotal: vidaNovo, valorUnitario: vidaUnitarioNovo }
   ];
 
   function formatCurrency(value) {
@@ -29,24 +28,16 @@ function Vida() {
     >
       <h2 className="section-title">Seguro de Vida</h2>
       <div className="comparison-grid">
-        <motion.div 
-          className="comparison-card"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <div className="card-title">👥 Opção 1 - 63 Colaboradores</div>
-          <div className="value-display value-novo">R$ 1.668,00</div>
-          <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitario1)}</strong></div>
-        </motion.div>
-        <motion.div 
-          className="comparison-card"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <div className="card-title">👥 Opção 2 - 148 Colaboradores</div>
-          <div className="value-display value-novo">R$ 4.142,79</div>
-          <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitario2)}</strong></div>
-        </motion.div>
+        <Card>
+          <div className="card-title">👥 Opção 1 - {vidaColaboradoresAtual} Colaboradores</div>
+          <div className="value-display value-novo">{formatCurrency(vidaAtual)}</div>
+          <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioAtual)}</strong></div>
+        </Card>
+        <Card>
+          <div className="card-title">👥 Opção 2 - {vidaColaboradoresNovo} Colaboradores</div>
+          <div className="value-display value-novo">{formatCurrency(vidaNovo)}</div>
+          <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioNovo)}</strong></div>
+        </Card>
       </div>
 
       <div style={{ height: '200px', marginTop: '20px' }}>
@@ -85,15 +76,15 @@ function Vida() {
           <tbody>
             <tr>
               <td>Opção 1</td>
-              <td>63</td>
-              <td>R$ 1.763,37</td>
-              <td>{formatCurrency(vidaUnitario1)}</td>
+              <td>{vidaColaboradoresAtual}</td>
+              <td>{formatCurrency(vidaAtual)}</td>
+              <td>{formatCurrency(vidaUnitarioAtual)}</td>
             </tr>
             <tr>
               <td>Opção 2</td>
-              <td>148</td>
-              <td>R$ 4.142,79</td>
-              <td>{formatCurrency(vidaUnitario2)}</td>
+              <td>{vidaColaboradoresNovo}</td>
+              <td>{formatCurrency(vidaNovo)}</td>
+              <td>{formatCurrency(vidaUnitarioNovo)}</td>
             </tr>
           </tbody>
         </table>
