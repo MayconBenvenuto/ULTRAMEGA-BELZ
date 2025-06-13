@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Dashboard from "./Dashboard";
 import { ThemeProvider, useTheme } from "./ThemeContext";
+import conteudoSite from "./configConteudo";
 import "./App.css";
 
 function AppContent() {
@@ -19,20 +20,18 @@ function AppContent() {
           src={process.env.PUBLIC_URL + '/ultramega.png?v=1'} 
           alt="Logo Ultramega" 
           className="header-logo"
-          style={{ width: 150, height: 'auto', borderRadius: 8, boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' }}
           onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
         />
         <div className="header-center">
-          <h1 style={{ display: 'inline-block', verticalAlign: 'middle', margin: 0 }}>
-            ULTRAMEGA - BELZ SEGUROS
+          <h1>
+            {conteudoSite.header.titulo}
           </h1>
-          <p>Análise detalhada das propostas da Belz Corretora de Seguros</p>
+          <p>{conteudoSite.header.subtitulo}</p>
         </div>
         <img 
           src={process.env.PUBLIC_URL + '/belz.png?v=1'} 
           alt="Logo Belz" 
           className="header-logo"
-          style={{ width: 150, height: 'auto', borderRadius: 8, boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' }}
           onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/ultramega.png'; }}
         />
       </div>

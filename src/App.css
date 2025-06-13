@@ -1,4 +1,9 @@
+/*
+  Arquivo central de configuração de cores e estilos de seções do site.
+  Edite as variáveis abaixo para personalizar rapidamente as cores de cada seção.
+*/
 :root {
+  /* Cores principais do site */
   --primary-color: #011147;
   --secondary-color: #1976d2;
   --accent-color: #FF0000;
@@ -8,6 +13,28 @@
   --text-dark: #333;
   --card-radius: 12px;
   --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+
+  /* Cores das seções principais */
+  --section-custos-bg: linear-gradient(135deg, #011147 0%, #1a237e 50%, #0d47a1 100%);
+  --section-custos-title: #FF0000;
+  --section-custos-card-bg: rgba(255, 255, 255, 0.08);
+  --section-custos-card-label: #FF0000;
+  --section-custos-card-value: #FF0000;
+  --section-custos-total-mensal-bg: linear-gradient(135deg, #FF0000,rgb(133, 50, 50));
+  --section-custos-total-anual-bg: linear-gradient(135deg,rgb(92, 53, 53), #FF0000);
+
+  --section-belz-bg: linear-gradient(120deg, #011147 65%, #1976d2 100%);
+  --section-belz-border: 8px solid #1976d2;
+  --section-belz-title: #fff;
+
+  --section-vida-bg: linear-gradient(120deg, #011147 60%, #42a5f5 100%);
+  --section-vida-title: #fff;
+
+  --section-saude-bg: #fff;
+  --section-saude-title: #011147;
+
+  --section-total-savings-title: #1a237e;
+  --section-total-savings-amount: #011147;
 }
 
 /* General App Styles */
@@ -275,7 +302,7 @@ body {
 /* Custos Atuais Mensais Section */
 .ultramega-custos-container {
   margin-top: 30px;
-  background: linear-gradient(135deg, #011147 0%, #1a237e 50%, #0d47a1 100%);
+  background: var(--section-custos-bg);
   border-radius: 24px;
   padding: 50px 40px;
   box-shadow: 0 25px 50px rgba(1, 17, 71, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -294,7 +321,7 @@ body {
 .ultramega-custos-content { position: relative; z-index: 2; }
 .ultramega-custos-header { text-align: center; margin-bottom: 45px; }
 .ultramega-custos-title {
-  color: #FF0000; /* As per original style */
+  color: var(--section-custos-title);
   font-size: 2.8rem;
   font-weight: 700;
   margin: 0;
@@ -306,17 +333,16 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
   margin-bottom: 50px;
-  color: #FF0000; /* As per original style */
+  color: var(--section-custos-title);
 }
 .ultramega-custo-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
+  background: var(--section-custos-card-bg);
   border-radius: 16px;
   padding: 30px 25px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  color: #FF0000; /* As per original style */
+  color: var(--section-custos-card-value);
 }
 .ultramega-custo-card-header { display: flex; align-items: center; margin-bottom: 20px; }
 .ultramega-custo-card-icon-wrapper {
@@ -327,16 +353,16 @@ body {
   margin-right: 15px;
 }
 .ultramega-custo-card-label {
-  color: #FF0000; /* As per original style */
+  color: #fff; /* As per original style */
   font-size: 1.4rem;
   font-weight: 600;
   opacity: 0.9;
   line-height: 1.3;
 }
 .ultramega-custo-card-value {
-  color: #FF0000; /* As per original style */
-  font-size: 1.8rem;
-  font-weight: 700;
+  color: var(--section-custos-card-value);
+  font-size: 2.2rem;
+  font-weight: 900;
   text-align: right;
 }
 .ultramega-custos-divider {
@@ -361,8 +387,13 @@ body {
   position: relative;
   overflow: hidden;
 }
-.ultramega-total-card-mensal { background: linear-gradient(135deg, #FF0000,rgb(133, 50, 50)); }
-.ultramega-total-card-anual { background: linear-gradient(135deg,rgb(92, 53, 53), #FF0000); box-shadow: 0 15px 35px rgba(46, 125, 50, 0.4); }
+.ultramega-total-card-mensal {
+  background: var(--section-custos-total-mensal-bg);
+}
+.ultramega-total-card-anual {
+  background: var(--section-custos-total-anual-bg);
+  box-shadow: 0 15px 35px rgba(46, 125, 50, 0.4);
+}
 .ultramega-total-card-decoration {
   position: absolute;
   top: -20px;
@@ -405,7 +436,7 @@ body {
   margin-top: 56px;
   border-left: 8px solid #1976d2;
   box-shadow: 0 8px 48px 0 #01114755;
-  background: linear-gradient(120deg, #011147 65%, #1976d2 100%);
+  background: var(--section-belz-bg);
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -497,7 +528,7 @@ body {
   padding: 20px;
 }
 .total-savings-title {
-  color: #1a237e;
+  color: var(--section-total-savings-title);
   text-align: center;
   width: 100%;
   font-size: 1.8rem; /* Consistent with other section titles */
@@ -526,7 +557,7 @@ body {
   max-width: 420px;
 }
 .total-savings-annual-amount { /* Already has .amount class */
-  color: #011147;
+  color: var(--section-total-savings-amount);
   font-size: 2.8rem;
   margin-top: 18px;
   text-align: center;

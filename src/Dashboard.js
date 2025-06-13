@@ -5,6 +5,7 @@ import Saude from "./Saude";
 import Frota from "./Frota";
 import Vida from "./Vida";
 import { useTheme } from "./ThemeContext";
+import conteudoSite from "./configConteudo";
 
 function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -15,30 +16,32 @@ function Dashboard() {
   const saudeAtual = 59214.13;
   const saudeNovo = 47100.53;
   // Frota
-  const frotaAtual = 260050.01;
+  const frotaAtual = 21670.83 * 12; // Corrigido para valor anual
   const tokioValor = 15800.03;
   const allianzValor = 206507.71;
   const frotaNovo = tokioValor + allianzValor;
 
-  // Economia
-  const economiaSaudeAnual = (saudeAtual - saudeNovo) * 12;
-  const economiaFrotaAnual = frotaAtual - frotaNovo;
-  const economiaAnualCorreta = economiaSaudeAnual + economiaFrotaAnual;
-  const economiaMensalCorreta = economiaAnualCorreta / 12;
-
   // Valores para Vida
-  const vidaColaboradoresAtual = 63;
-  const vidaColaboradoresNovo = 148;
-  const vidaAtual = 1668; // valor total opção 1
-  const vidaNovo = 4142.79; // valor total opção 2
+  const vidaColaboradoresAtual = 70;
+  const vidaAtual = 668; // valor total opção 1
   const vidaUnitarioAtual = vidaAtual / vidaColaboradoresAtual;
-  const vidaUnitarioNovo = vidaNovo / vidaColaboradoresNovo;
+  const vidaNovo = 1763.37;
+
   // Custos extras
   const ouvidoria = 1300.00;
   const ginasticaLaboral = 2500.00;
   // Custos totais
-  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + frotaAtual + vidaAtual;
-  const custoTotalAtualAno = custoMensalAtual * 12;
+  // Corrigido: frotaAtual é anual, então para o custo mensal usamos frotaAtual / 12
+  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + (frotaAtual / 12) + vidaAtual;
+  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual + vidaAtual * 12;
+
+  // Economia
+  // Cálculo correto: economia anual = (saudeAtual - saudeNovo)*12 + (frotaAtual - frotaNovo) + (vidaAtual - vidaNovo)*12
+  const economiaSaudeAnual = (saudeAtual - saudeNovo) * 12;
+  const economiaFrotaAnual = frotaAtual - frotaNovo;
+  const economiaVidaAnual = (vidaAtual - vidaNovo) * 12;
+  const economiaAnualCorreta = economiaSaudeAnual + economiaFrotaAnual + economiaVidaAnual;
+  const economiaMensalCorreta = economiaAnualCorreta / 12;
 
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
@@ -78,11 +81,9 @@ function Dashboard() {
       <Saude saudeAtual={saudeAtual} saudeNovo={saudeNovo} />
       <Vida 
         vidaAtual={vidaAtual}
-        vidaNovo={vidaNovo}
         vidaColaboradoresAtual={vidaColaboradoresAtual}
-        vidaColaboradoresNovo={vidaColaboradoresNovo}
         vidaUnitarioAtual={vidaUnitarioAtual}
-        vidaUnitarioNovo={vidaUnitarioNovo}
+        vidaNovo={1763.37} // Novo valor Belz
       />
       <Frota frotaAtual={frotaAtual} tokioValor={tokioValor} allianzValor={allianzValor} />
 
@@ -101,18 +102,19 @@ function Dashboard() {
     <div className="ultramega-custos-header">
       
       <h2 className="ultramega-custos-title">
-        Custos Atuais Mensais
+        {conteudoSite.custos.titulo}
       </h2>
     </div>
     
     {/* Cards de custos em layout mais limpo */}
     <div className="ultramega-custos-grid">
-      {[
-        { label: 'Ouvidoria', valor: ouvidoria, icon: '🎧', color: '#FF0000' },
-        { label: 'Ginástica Laboral', valor: ginasticaLaboral, icon: '💪', color: '#FF0000' },
-        { label: 'Saúde Atual', valor: saudeAtual, icon: '⚕️', color: '#FF0000' },
-        { label: 'Frota Atual', valor: frotaAtual, icon: '🚙', color: '#FF0000' },
-        { label: 'Vida', valor: vidaAtual, icon: '🛡️', color: '#FF0000' }
+      {[ 
+        { label: conteudoSite.custos.ouvidoria, valor: ouvidoria, icon: '🎧', color: '#FF0000' },
+        { label: conteudoSite.custos.ginastica, valor: ginasticaLaboral, icon: '💪', color: '#FF0000' },
+        { label: conteudoSite.custos.saude, valor: saudeAtual, icon: '⚕️', color: '#FF0000' },
+        // Corrigido: mostrar valor mensal da frota
+        { label: conteudoSite.custos.frota, valor: frotaAtual / 12, icon: '🚙', color: '#FF0000' },
+        { label: conteudoSite.custos.vida, valor: vidaAtual, icon: '🛡️', color: '#FF0000' }
       ].map((item, index) => (
         <motion.div
           className="ultramega-custo-card"
@@ -238,7 +240,7 @@ function Dashboard() {
                 className="proposta-belz-img"
                 style={{
                   width: '100%',
-                  maxWidth: 720,
+                  maxWidth: 1080,
                   height: 'auto',
                   borderRadius: 12,
                   background: '',
@@ -266,26 +268,32 @@ function Dashboard() {
       </motion.div>
 
       <div className="chart-section" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
-        <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>📊 Comparativo de Valores Anual</h2>
+        <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>{conteudoSite.chart.titulo}</h2>
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={[
-            { name: "Saúde", atual: saudeAtual*12, novo: saudeNovo*12 },
-            { name: "Frota", atual: frotaAtual*12, novo: frotaNovo*12 },
-            { name: "Vida", atual: vidaAtual*12, novo: vidaNovo*12 },
+            { name: "Saúde", atual: saudeAtual * 12, novo: saudeNovo * 12 },
+            { name: "Frota", atual: 260049.96, novo: 222307.68 },
+            { name: "Vida", atual: 668 * 12, novo: 1763.37 * 12 },
+            { name: "Belz Conecta Saúde", atual: 0, novo: 14976.00 },
           ]} barCategoryGap={30} barGap={8}>
             <XAxis dataKey="name" stroke={isDark ? "#fff" : "#011147"} />
             <YAxis stroke={isDark ? "#fff" : "#011147"} />
             <Tooltip
-              formatter={(value) => formatCurrency(value)}
+              formatter={(value, key, item) => [formatCurrency(value), item && item.payload && item.dataKey === 'atual' ? 'Valor Atual' : 'Valor Belz']}
+              labelFormatter={label => `Categoria: ${label}`}
               contentStyle={{
                 background: isDark ? "#2d3436" : "#fff",
                 border: "none",
                 borderRadius: "8px",
                 color: isDark ? "#fff" : "#011147",
               }}
+              itemSorter={item => item.dataKey === 'atual' ? 1 : 0}
             />
-            <Legend wrapperStyle={{ fontSize: '1.1rem' }} />
-            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" maxBarSize={60} minPointSize={30} />
+            <Legend payload={[
+              { value: 'Valor Atual', type: 'rect', color: '#1a237e', id: 'atual' },
+              { value: 'Valor Belz', type: 'rect', color: '#1976d2', id: 'novo' }
+            ]} wrapperStyle={{ fontSize: '1.1rem' }} />
+            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" maxBarSize={60} minPointSize={0} isAnimationActive={false} />
             <Bar dataKey="novo" fill="#1976d2" name="Valor Belz" maxBarSize={90} minPointSize={50} />
           </BarChart>
         </ResponsiveContainer>
@@ -298,7 +306,7 @@ function Dashboard() {
         transition={{ duration: 0.5 }}
         style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', width: '100%' }}
       >
-        <h2 style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>💰 Economia Total Estimada</h2>
+        <h2 style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>{conteudoSite.economia.titulo}</h2>
         <p style={{ fontSize: '1.2rem', marginTop: 10, textAlign: 'center' }}>
           <span style={{
             display: 'inline-block',
@@ -315,11 +323,11 @@ function Dashboard() {
             width: '100%',
             maxWidth: 420
           }}>
-            Economia estimada por MÊS: {formatCurrency(economiaMensalCorreta)}
+            {conteudoSite.economia.economiaMes} {formatCurrency(economiaMensalCorreta)}
           </span>
         </p>
-        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>Economia estimada por ANO: {formatCurrency(economiaAnualCorreta)}</div>
-        <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>Valor economizado anualmente com as propostas da Belz Corretora</p>
+        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>{conteudoSite.economia.economiaAno} {formatCurrency(economiaAnualCorreta)}</div>
+        <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>{conteudoSite.economia.descricao}</p>
       </motion.div>
     </motion.div>
   );

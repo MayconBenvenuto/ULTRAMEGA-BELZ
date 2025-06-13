@@ -1,17 +1,8 @@
 import React from "react";
 import Card from "./components/Card";
 import { motion } from "framer-motion";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { useTheme } from "./ThemeContext";
 
-function Vida({ vidaAtual, vidaNovo, vidaColaboradoresAtual, vidaColaboradoresNovo, vidaUnitarioAtual, vidaUnitarioNovo }) {
-  const { isDark } = useTheme();
-
-  const data = [
-    { name: 'Opção 1', colaboradores: vidaColaboradoresAtual, valorTotal: vidaAtual, valorUnitario: vidaUnitarioAtual },
-    { name: 'Opção 2', colaboradores: vidaColaboradoresNovo, valorTotal: vidaNovo, valorUnitario: vidaUnitarioNovo }
-  ];
-
+function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }) {
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
       style: "currency",
@@ -27,38 +18,37 @@ function Vida({ vidaAtual, vidaNovo, vidaColaboradoresAtual, vidaColaboradoresNo
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <h2 className="section-title">Seguro de Vida</h2>
-      <div className="comparison-grid">
+      <div className="comparison-grid" style={{ alignItems: 'flex-start' }}>
         <Card>
-          <div className="card-title">👥 Opção 1 - {vidaColaboradoresAtual} Colaboradores</div>
+          <div className="card-title">👥 {vidaColaboradoresAtual} Colaboradores</div>
           <div className="value-display value-novo">{formatCurrency(vidaAtual)}</div>
           <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioAtual)}</strong></div>
         </Card>
-        <Card>
-          <div className="card-title">👥 Opção 2 - {vidaColaboradoresNovo} Colaboradores</div>
-          <div className="value-display value-novo">{formatCurrency(vidaNovo)}</div>
-          <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioNovo)}</strong></div>
-        </Card>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start', width: '100%', maxWidth: 220, marginLeft: 'auto' }}>
+          <a
+            href="/arquivos/seguro-de-vida.pdf"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="download-btn"
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              background: '#1976d2',
+              color: '#fff',
+              borderRadius: 8,
+              fontWeight: 700,
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px #01114733',
+              marginTop: 16,
+              transition: 'background 0.2s',
+              textAlign: 'center',
+            }}
+          >
+            📄 Baixar Seguro de Vida (PDF)
+          </a>
+        </div>
       </div>
-
-      <div style={{ height: '200px', marginTop: '20px' }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
-            <XAxis dataKey="name" stroke={isDark ? "#fff" : "#000"} />
-            <YAxis stroke={isDark ? "#fff" : "#000"} />
-            <Tooltip
-              formatter={(value) => formatCurrency(value)}
-              contentStyle={{
-                background: isDark ? "#2d3436" : "#fff",
-                border: "none",
-                borderRadius: "8px",
-                color: isDark ? "#fff" : "#000"
-              }}
-            />
-            <Bar dataKey="valorTotal" fill="#3498db" name="Valor Total" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -67,7 +57,6 @@ function Vida({ vidaAtual, vidaNovo, vidaColaboradoresAtual, vidaColaboradoresNo
         <table className="summary-table">
           <thead>
             <tr>
-              <th>Opção</th>
               <th>Colaboradores</th>
               <th>Valor Total</th>
               <th>Valor Unitário</th>
@@ -75,16 +64,9 @@ function Vida({ vidaAtual, vidaNovo, vidaColaboradoresAtual, vidaColaboradoresNo
           </thead>
           <tbody>
             <tr>
-              <td>Opção 1</td>
               <td>{vidaColaboradoresAtual}</td>
               <td>{formatCurrency(vidaAtual)}</td>
               <td>{formatCurrency(vidaUnitarioAtual)}</td>
-            </tr>
-            <tr>
-              <td>Opção 2</td>
-              <td>{vidaColaboradoresNovo}</td>
-              <td>{formatCurrency(vidaNovo)}</td>
-              <td>{formatCurrency(vidaUnitarioNovo)}</td>
             </tr>
           </tbody>
         </table>
