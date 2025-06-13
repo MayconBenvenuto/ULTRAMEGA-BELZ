@@ -292,6 +292,52 @@ function Dashboard() {
                 }}
                 onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
               />
+              {/* Botões de download placeholders para a proposta Belz */}
+              <div style={{display: 'flex', justifyContent: 'center', gap: 24, marginTop: 24, marginBottom: 8}}>
+                <button
+                  style={{
+                    background: '#011147',
+                    color: '#fff',
+                    fontWeight: 700,
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '12px 28px',
+                    boxShadow: '0 2px 12px #01114722',
+                    cursor: 'pointer',
+                    opacity: 1,
+                    transition: 'background 0.2s',
+                    marginRight: 8,
+                    pointerEvents: 'auto',
+                    filter: 'none',
+                    fontSize: '2rem', // Tamanho grande e garantido
+                  }}
+                  tabIndex={0}
+                  aria-disabled="true"
+                >
+                  Download Proposta Belz (SulAmérica)
+                </button>
+                <button
+                  style={{
+                    background: '#011147',
+                    color: '#fff',
+                    fontWeight: 700,
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '12px 28px',
+                    boxShadow: '0 2px 12px #01114722',
+                    cursor: 'pointer',
+                    opacity: 1,
+                    transition: 'background 0.2s',
+                    pointerEvents: 'auto',
+                    filter: 'none',
+                    fontSize: '2rem', // Tamanho grande e garantido
+                  }}
+                  tabIndex={0}
+                  aria-disabled="true"
+                >
+                  Download Proposta Belz (Hapvida)
+                </button>
+              </div>
               <style>{`
                 @media (max-width: 600px) {
                   .proposta-belz-img {

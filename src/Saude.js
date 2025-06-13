@@ -76,6 +76,50 @@ function Saude({ saudeAtual, saudeNovo }) {
           <div>Seguradora: <strong>Bradesco/Unimed</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-novo">{formatCurrency(saudeNovo)}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 16 }}>
+            <button
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: '#011147',
+                color: '#fff',
+                borderRadius: 8,
+                fontWeight: 700,
+                textDecoration: 'none',
+                boxShadow: '0 2px 8px #01114733',
+                transition: 'background 0.2s',
+                textAlign: 'center',
+                border: 'none',
+                cursor: 'pointer',
+                opacity: 1,
+              }}
+              tabIndex={0}
+              aria-disabled="true"
+            >
+              Download Proposta Belz (SulAmérica)
+            </button>
+            <button
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: '#011147',
+                color: '#fff',
+                borderRadius: 8,
+                fontWeight: 700,
+                textDecoration: 'none',
+                boxShadow: '0 2px 8px #01114733',
+                transition: 'background 0.2s',
+                textAlign: 'center',
+                border: 'none',
+                cursor: 'pointer',
+                opacity: 1,
+              }}
+              tabIndex={0}
+              aria-disabled="true"
+            >
+              Download Proposta Belz (Hapvida)
+            </button>
+          </div>
         </Card>
       </div>
       <motion.div 
