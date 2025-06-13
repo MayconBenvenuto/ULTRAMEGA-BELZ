@@ -96,7 +96,7 @@ function Saude({ saudeAtual, saudeNovo }) {
               tabIndex={0}
               aria-disabled="true"
             >
-              Download Proposta Belz (SulAmérica)
+              Download Proposta Belz (Bradesco)
             </button>
             <button
               style={{
@@ -117,7 +117,7 @@ function Saude({ saudeAtual, saudeNovo }) {
               tabIndex={0}
               aria-disabled="true"
             >
-              Download Proposta Belz (Hapvida)
+              Download Proposta Belz (Unimed)
             </button>
           </div>
         </Card>
