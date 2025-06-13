@@ -182,7 +182,7 @@ body {
   font-weight: bold;
   margin: 10px 0;
 }
-.value-atual { color: #e74c3c; }
+.value-atual { color: var(--accent-color); }
 .value-novo { color: #2ecc71; }
 
 /* VidaSection Specific Styles */

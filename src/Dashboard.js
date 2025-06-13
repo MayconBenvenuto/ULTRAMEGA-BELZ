@@ -13,7 +13,7 @@ function Dashboard() {
 
   // Centralização dos valores principais
   // Saúde
-  const saudeAtual = 59214.13;
+  const saudeAtual = 61280.09; // Valor atualizado
   const saudeNovo = 47100.53;
   // Frota
   const frotaAtual = 21670.83 * 12; // Corrigido para valor anual
@@ -22,7 +22,7 @@ function Dashboard() {
   const frotaNovo = tokioValor + allianzValor;
 
   // Valores para Vida
-  const vidaColaboradoresAtual = 70;
+  const vidaColaboradoresAtual = 33;
   const vidaAtual = 668; // valor total opção 1
   const vidaUnitarioAtual = vidaAtual / vidaColaboradoresAtual;
   const vidaNovo = 1763.37;
@@ -35,12 +35,16 @@ function Dashboard() {
   const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + (frotaAtual / 12) + vidaAtual;
   const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual + vidaAtual * 12;
 
+  // Belz Conecta Saúde
+  const belzConectaSaude = 14976.00; // valor anual
+
   // Economia
-  // Cálculo correto: economia anual = (saudeAtual - saudeNovo)*12 + (frotaAtual - frotaNovo) + (vidaAtual - vidaNovo)*12
+  // Agora inclui Belz Conecta Saúde como custo adicional na proposta Belz
+  // economia anual = (saudeAtual - saudeNovo)*12 + (frotaAtual - frotaNovo) + (vidaAtual - vidaNovo)*12 - belzConectaSaude
   const economiaSaudeAnual = (saudeAtual - saudeNovo) * 12;
   const economiaFrotaAnual = frotaAtual - frotaNovo;
   const economiaVidaAnual = (vidaAtual - vidaNovo) * 12;
-  const economiaAnualCorreta = economiaSaudeAnual + economiaFrotaAnual + economiaVidaAnual;
+  const economiaAnualCorreta = economiaSaudeAnual + economiaFrotaAnual + economiaVidaAnual - belzConectaSaude;
   const economiaMensalCorreta = economiaAnualCorreta / 12;
 
   function formatCurrency(value) {
@@ -93,28 +97,37 @@ function Dashboard() {
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.5, delay: 1 }}
+  style={{
+    background: 'linear-gradient(120deg, #fff 60%, #f4f7f6 100%)',
+    boxShadow: '0 8px 32px 0 #01114722',
+    borderRadius: 32,
+    padding: '40px 24px',
+    border: 'none',
+    margin: '40px 0',
+    position: 'relative',
+    overflow: 'visible',
+  }}
 >
-  {/* Padrão geométrico de fundo */}
-  <div className="ultramega-custos-pattern-bg" />
-  
-  <div className="ultramega-custos-content">
-    {/* Header da seção */}
-    <div className="ultramega-custos-header">
-      
-      <h2 className="ultramega-custos-title">
+
+  <div className="ultramega-custos-content" style={{ position: 'relative', zIndex: 2 }}>
+    <div className="ultramega-custos-header" style={{ textAlign: 'center', marginBottom: 32 }}>
+      <h2 className="ultramega-custos-title" style={{ color: '#011147', fontSize: '2.2rem', fontWeight: 800, letterSpacing: 0.5, textShadow: '0 2px 8px #01114722' }}>
         {conteudoSite.custos.titulo}
       </h2>
     </div>
-    
-    {/* Cards de custos em layout mais limpo */}
-    <div className="ultramega-custos-grid">
+    <div className="ultramega-custos-grid" style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 32,
+      justifyContent: 'center',
+      marginBottom: 40,
+    }}>
       {[ 
-        { label: conteudoSite.custos.ouvidoria, valor: ouvidoria, icon: '🎧', color: '#FF0000' },
-        { label: conteudoSite.custos.ginastica, valor: ginasticaLaboral, icon: '💪', color: '#FF0000' },
-        { label: conteudoSite.custos.saude, valor: saudeAtual, icon: '⚕️', color: '#FF0000' },
-        // Corrigido: mostrar valor mensal da frota
-        { label: conteudoSite.custos.frota, valor: frotaAtual / 12, icon: '🚙', color: '#FF0000' },
-        { label: conteudoSite.custos.vida, valor: vidaAtual, icon: '🛡️', color: '#FF0000' }
+        { label: conteudoSite.custos.ouvidoria, valor: ouvidoria, icon: '🎧', color: '#1976d2' },
+        { label: conteudoSite.custos.ginastica, valor: ginasticaLaboral, icon: '💪', color: '#1976d2' },
+        { label: conteudoSite.custos.saude, valor: saudeAtual, icon: '⚕️', color: '#1976d2' },
+        { label: conteudoSite.custos.frota, valor: frotaAtual / 12, icon: '🚙', color: '#1976d2' },
+        { label: conteudoSite.custos.vida, valor: vidaAtual, icon: '🛡️', color: '#1976d2' }
       ].map((item, index) => (
         <motion.div
           className="ultramega-custo-card"
@@ -122,77 +135,103 @@ function Dashboard() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 * index }}
-          whileHover={{ y: -5, transition: { duration: 0.2 } }}
+          whileHover={{ y: -8, scale: 1.04, boxShadow: '0 8px 32px #1976d244' }}
+          style={{
+            background: '#fff',
+            borderRadius: 20,
+            border: '1.5px solid #e3e8f0',
+            minWidth: 220,
+            maxWidth: 260,
+            boxShadow: '0 2px 12px #01114711',
+            padding: '28px 18px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            transition: 'box-shadow 0.2s',
+            position: 'relative',
+          }}
         >
-          <div className="ultramega-custo-card-header">
-            <div 
-              className="ultramega-custo-card-icon-wrapper"
-              style={{ background: `linear-gradient(135deg, ${item.color}, ${item.color}dd)`, boxShadow: `0 8px 20px ${item.color}40` }}
-            >
-              {item.icon}
-            </div>
-            <div>
-              <div className="ultramega-custo-card-label">
-                {item.label}
-              </div>
-            </div>
-          </div>
-          
-          <div className="ultramega-custo-card-value">
+          <div style={{
+            width: 54,
+            height: 54,
+            borderRadius: '50%',
+            background: `linear-gradient(135deg, ${item.color} 60%, #42a5f5 100%)`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 28,
+            marginBottom: 12,
+            boxShadow: `0 4px 16px ${item.color}22`,
+          }}>{item.icon}</div>
+          <div style={{ fontWeight: 700, fontSize: '1.15rem', color: '#011147', marginBottom: 6, textAlign: 'center' }}>{item.label}</div>
+          <div style={{ fontWeight: 900, fontSize: '2.1rem', color: 'red', marginBottom: 4, textShadow: '0 2px 8px #01114722' }}>
             R$ {item.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
           </div>
         </motion.div>
       ))}
     </div>
-
-    {/* Linha divisória elegante */}
-    <div className="ultramega-custos-divider" />
-
-    {/* Seção de totais com layout horizontal */}
-    <div className="ultramega-custos-totals-grid">
-      {/* Total Mensal */}
+    <div className="ultramega-custos-totals-grid" style={{
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 32,
+      justifyContent: 'center',
+      alignItems: 'stretch',
+      margin: '0 auto',
+      maxWidth: 900,
+    }}>
       <motion.div
         className="ultramega-total-card ultramega-total-card-mensal"
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
+        style={{
+          background: 'linear-gradient(135deg, #1976d2 60%, #42a5f5 100%)',
+          color: '#fff',
+          borderRadius: 18,
+          boxShadow: '0 8px 32px #1976d244',
+          padding: '32px 28px',
+          minWidth: 220,
+          textAlign: 'center',
+        }}
       >
-        <div className="ultramega-total-card-decoration right" />
-        
-        <div className="ultramega-total-card-label-text">
-          Custo Mensal
-        </div>
-        <div className="ultramega-total-card-value-text">
-          {formatCurrency(custoMensalAtual)}
-        </div>
+        <div style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 8, letterSpacing: 1, textTransform: 'uppercase', opacity: 0.85 }}>Custo Mensal</div>
+        <div style={{ fontWeight: 900, fontSize: '2.2rem', letterSpacing: 0.5 }}>{formatCurrency(custoMensalAtual)}</div>
       </motion.div>
-
-      {/* Multiplicador */}
       <motion.div
         className="ultramega-custos-multiplier"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, delay: 1.2 }}
+        style={{
+          background: 'transparent',
+          color: '#1976d2',
+          fontWeight: 900,
+          fontSize: '2.2rem',
+          alignSelf: 'center',
+          border: 'none',
+          boxShadow: 'none',
+        }}
       >
         <span className="operator">×</span>
-        <span className="number">12</span>
+        <span className="number" style={{ fontSize: '1.1rem', fontWeight: 700, marginLeft: 2 }}>12</span>
       </motion.div>
-
-      {/* Total Anual */}
       <motion.div
         className="ultramega-total-card ultramega-total-card-anual"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
+        style={{
+          background: 'linear-gradient(135deg, #42a5f5 60%, #1976d2 100%)',
+          color: '#fff',
+          borderRadius: 18,
+          boxShadow: '0 8px 32px #1976d244',
+          padding: '32px 28px',
+          minWidth: 220,
+          textAlign: 'center',
+        }}
       >
-        <div className="ultramega-total-card-decoration left" />
-        
-        <div className="ultramega-total-card-label-text">
-          Custo Anual
-        </div>
-        <div className="ultramega-total-card-value-text">
-          {formatCurrency(custoTotalAtualAno)}
-        </div>
+        <div style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 8, letterSpacing: 1, textTransform: 'uppercase', opacity: 0.85 }}>Custo Anual</div>
+        <div style={{ fontWeight: 900, fontSize: '2.2rem', letterSpacing: 0.5 }}>{formatCurrency(custoTotalAtualAno)}</div>
       </motion.div>
     </div>
   </div>
@@ -290,11 +329,11 @@ function Dashboard() {
               itemSorter={item => item.dataKey === 'atual' ? 1 : 0}
             />
             <Legend payload={[
-              { value: 'Valor Atual', type: 'rect', color: '#1a237e', id: 'atual' },
-              { value: 'Valor Belz', type: 'rect', color: '#1976d2', id: 'novo' }
+              { value: 'Valor Atual', type: 'rect', color: 'red', id: 'atual' },
+              { value: 'Valor Belz', type: 'rect', color: '#011147', id: 'novo' }
             ]} wrapperStyle={{ fontSize: '1.1rem' }} />
-            <Bar dataKey="atual" fill="#1a237e" name="Valor Atual" maxBarSize={60} minPointSize={0} isAnimationActive={false} />
-            <Bar dataKey="novo" fill="#1976d2" name="Valor Belz" maxBarSize={90} minPointSize={50} />
+            <Bar dataKey="atual" fill="red" name="Valor Atual" maxBarSize={60} minPointSize={0} isAnimationActive={false} />
+            <Bar dataKey="novo" fill="#011147" name="Valor Belz" maxBarSize={90} minPointSize={50} />
           </BarChart>
         </ResponsiveContainer>
       </div>

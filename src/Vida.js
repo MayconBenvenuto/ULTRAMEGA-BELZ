@@ -17,14 +17,13 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <h2 className="section-title">Seguro de Vida</h2>
+      <h2 className="section-title">Seguro de Vida Anual </h2>
       <div className="comparison-grid" style={{ alignItems: 'flex-start' }}>
         <Card>
+          <p className="card-title">📋 Situação Atual</p>
           <div className="card-title">👥 {vidaColaboradoresAtual} Colaboradores</div>
-          <div className="value-display value-novo">{formatCurrency(vidaAtual)}</div>
+          <div className="value-display value-novo" style={{ color: 'var(--accent-color)' }}>{formatCurrency(vidaAtual)}</div>
           <div>Valor por colaborador: <strong>{formatCurrency(vidaUnitarioAtual)}</strong></div>
-        </Card>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start', width: '100%', maxWidth: 220, marginLeft: 'auto' }}>
           <a
             href="/arquivos/seguro-de-vida.pdf"
             download
@@ -45,9 +44,39 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
               textAlign: 'center',
             }}
           >
-            📄 Baixar Seguro de Vida (PDF)
+            BAIXAR SEGURO ALFA (PDF)
           </a>
-        </div>
+        </Card>
+
+        <Card>
+          <p className="card-title">📋 Proposta Belz</p>
+          <div className="card-title">👥 70 Colaboradores</div>
+          <div className="value-display value-novo" style={{ color: '#011147' }}>{formatCurrency(vidaNovo)}</div>
+          <div>Valor por colaborador: <strong>{formatCurrency(vidaNovo / 70)}</strong></div>
+          <a
+            href="/arquivos/orcamento.pdf"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="download-btn"
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              background: '#1976d2',
+              color: '#fff',
+              borderRadius: 8,
+              fontWeight: 700,
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px #01114733',
+              marginTop: 16,
+              transition: 'background 0.2s',
+              textAlign: 'center',
+            }}
+          >
+            BAIXAR SEGURO BELZ (PDF)
+          </a>
+        </Card>
+
       </div>
       <motion.div
         initial={{ opacity: 0 }}
