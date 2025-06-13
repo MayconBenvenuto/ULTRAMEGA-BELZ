@@ -91,12 +91,13 @@ function Saude({ saudeAtual, saudeNovo }) {
                 textAlign: 'center',
                 border: 'none',
                 cursor: 'pointer',
+                fontSize: '1.2rem',
                 opacity: 1,
               }}
               tabIndex={0}
               aria-disabled="true"
             >
-              Download Proposta Belz (Bradesco)
+              BAIXAR PROPOSTA BELZ (BRADESCO)
             </button>
             <button
               style={{
@@ -111,13 +112,14 @@ function Saude({ saudeAtual, saudeNovo }) {
                 transition: 'background 0.2s',
                 textAlign: 'center',
                 border: 'none',
+                fontSize: '1.2rem',
                 cursor: 'pointer',
                 opacity: 1,
               }}
               tabIndex={0}
               aria-disabled="true"
             >
-              Download Proposta Belz (Unimed)
+              BAIXAR PROPOSTA BELZ (UNIMED)
             </button>
           </div>
         </Card>

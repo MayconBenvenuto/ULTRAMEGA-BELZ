@@ -44,7 +44,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
               textAlign: 'center',
             }}
           >
-            BAIXAR SEGURO ALFA (PDF)
+            BAIXAR SEGURO ALFA 
           </a>
         </Card>
 
@@ -73,7 +73,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
               textAlign: 'center',
             }}
           >
-            BAIXAR SEGURO BELZ (PDF)
+            BAIXAR SEGURO SULAMÉRICA
           </a>
         </Card>
 
