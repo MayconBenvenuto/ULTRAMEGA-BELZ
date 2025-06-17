@@ -479,10 +479,8 @@ function Dashboard() {
             alt="Logo Conecta Saúde" 
             style={{ height: 'auto', width: 300, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
             onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />
-
-              <img 
-                src={process.env.PUBLIC_URL + '/proposta-belz.svg?v=1'} 
+              />              <img 
+                src={process.env.PUBLIC_URL + '/proposta-belz.png?v=1'} 
                 alt="Proposta Belz" 
                 className="proposta-belz-img"
                 style={{
