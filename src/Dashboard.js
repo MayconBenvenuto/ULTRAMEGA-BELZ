@@ -15,7 +15,7 @@ function Dashboard() {
   // Centralização dos valores principais
   // Saúde
   const saudeAtual = 61280.09; // Valor atualizado
-  const saudeNovo = 47100.53;
+  const saudeNovo = 47454.61;
   // Frota
   const frotaAtual = 21670.83 * 12; // Corrigido para valor anual
   const tokioValor = 15800.03;
@@ -29,7 +29,7 @@ function Dashboard() {
 
   // Valores para Seguro Empresarial
   const empresarialAtual = 102743.55; // Valor atual do seguro empresarial
-  const empresarialNovo = 3500.00; // Valor da proposta Belz
+  const empresarialNovo = 60000.00; // Valor da proposta Belz
 
   // Custos extras
   const ouvidoria = 1300.00;
@@ -41,8 +41,8 @@ function Dashboard() {
   const belzConectaSaude = 14976.00; // valor anual
 
   // Custos totais proposta Belz
-  const custoMensalBelz = ouvidoria + ginasticaLaboral + saudeNovo + (frotaNovo / 12) + vidaNovo + (empresarialNovo / 12) + (belzConectaSaude / 12);
-  const custoTotalBelzAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeNovo * 12 + frotaNovo + vidaNovo * 12 + empresarialNovo + belzConectaSaude;
+  const custoMensalBelz = saudeNovo + (frotaNovo / 12) + vidaNovo + (empresarialNovo / 12);
+  const custoTotalBelzAno = saudeNovo * 12 + frotaNovo + vidaNovo * 12 + empresarialNovo;
 
   // Economia
   // Agora inclui Belz Conecta Saúde como custo adicional na proposta Belz
@@ -275,13 +275,10 @@ function Dashboard() {
       justifyContent: 'center',
       marginBottom: 40,
     }}>      {[ 
-        { label: conteudoSite.custos.ouvidoria, valor: ouvidoria, icon: '🎧', color: '#1976d2' },
-        { label: conteudoSite.custos.ginastica, valor: ginasticaLaboral, icon: '💪', color: '#1976d2' },
         { label: conteudoSite.custos.saude, valor: saudeNovo, icon: '⚕️', color: '#1976d2' },
         { label: conteudoSite.custos.frota, valor: frotaNovo / 12, icon: '🚙', color: '#1976d2' },
         { label: conteudoSite.custos.vida, valor: vidaNovo, icon: '🛡️', color: '#1976d2' },
-        { label: 'Empresarial', valor: empresarialNovo / 12, icon: '🏢', color: '#1976d2' },
-        { label: 'Belz Conecta', valor: belzConectaSaude / 12, icon: '🌐', color: '#1976d2' }
+        { label: 'Empresarial', valor: empresarialNovo / 12, icon: '🏢', color: '#1976d2' }
       ].map((item, index) => (
         <motion.div
           className="belz-custo-card"

@@ -67,7 +67,7 @@ function SeguroEmpresarial({ empresarialAtual, empresarialNovo }) {
           <div className="card-title">🏢 Proposta Belz</div>
           <div>Seguradora: <strong>Nova Proposta</strong></div>
           <div>Apólice:</div>
-          <div className="value-display value-novo">{formatCurrency(empresarialNovo)}</div>
+          <div className="value-display value-novo">{formatCurrency(empresarialNovo)} - <span style={{ color: '#ff0000' }}>ESTIMADA</span></div>
           {/* Botão será adicionado quando os arquivos estiverem prontos */}
           <div style={{ marginTop: 16 }}>
             <div>Economia anual: <strong style={{ color: '#2ecc71' }}>{formatCurrency(empresarialEconomia)}</strong></div>
