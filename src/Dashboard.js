@@ -300,7 +300,7 @@ function Dashboard() {
                   tabIndex={0}
                   aria-disabled="true"
                 >
-                  Download Proposta Belz (Bradesco)
+                  BAIXAR PROPOSTA BELZ (Bradesco)
                 </button>
                 <button
                   className="download-btn"
@@ -308,7 +308,7 @@ function Dashboard() {
                   tabIndex={0}
                   aria-disabled="true"
                 >
-                  Download Proposta Belz (Unimed)
+                  BAIXAR PROPOSTA BELZ (Unimed)
                 </button>
               </div>
               <style>{`
