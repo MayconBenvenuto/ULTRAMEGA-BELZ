@@ -235,97 +235,7 @@ function Dashboard() {
       </motion.div>
     </div>
   </div>
-</motion.div>
-
-      {/* Seção Belz Conecta Saúde + Proposta Belz */}
-      <motion.div
-        className="section belz-conecta-saude super-destaque"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.7 }}
-        style={{
-          marginTop: 56,
-          borderLeft: '8px solid #1976d2',
-          boxShadow: '0 8px 48px 0 #01114755',
-          background: 'linear-gradient(120deg, #011147 65%, #1976d2 100%)',
-          color: '#fff',
-          position: 'relative',
-          overflow: 'hidden',
-          borderRadius: 36,
-          padding: 0,
-          minHeight: 340,
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 0,
-        }}
-      >
-        {/* Decoração de fundo com gradiente e formas */}
-        <div style={{ position: 'absolute', top: -60, right: -60, width: 320, height: 320, background: 'radial-gradient(circle at 80% 20%, #fff3, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
-        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, background: 'radial-gradient(circle at 10% 90%, #1976d2aa, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
-        {/* Coluna texto */}
-          <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-            <img 
-            src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
-            alt="Logo Conecta Saúde" 
-            style={{ height: 'auto', width: 300, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
-            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />
-
-              <img 
-                src={process.env.PUBLIC_URL + '/proposta-belz.svg?v=1'} 
-                alt="Proposta Belz" 
-                className="proposta-belz-img"
-                style={{
-                  width: '100%',
-                  maxWidth: 1080,
-                  height: 'auto',
-                  borderRadius: 12,
-                  background: '',
-                  boxShadow: '0 2px 8px #01114733',
-                  objectFit: 'contain',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto',
-                  display: 'block',
-                }}
-                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
-              />
-              {/* Botões de download placeholders para a proposta Belz */}
-              <div style={{display: 'flex', justifyContent: 'center', gap: 24, marginTop: 24, marginBottom: 8}}>
-                <button
-                  className="download-btn"
-                  style={{ fontSize: '1rem', marginRight: 8 }}
-                  tabIndex={0}
-                  aria-disabled="true"
-                >
-                  BAIXAR PROPOSTA BELZ (Bradesco)
-                </button>
-                <button
-                  className="download-btn"
-                  style={{ fontSize: '1rem' }}
-                  tabIndex={0}
-                  aria-disabled="true"
-                >
-                  BAIXAR PROPOSTA BELZ (Unimed)
-                </button>
-              </div>
-              <style>{`
-                @media (max-width: 600px) {
-                  .proposta-belz-img {
-                    max-width: 88vw !important;
-                    min-width: 0 !important;
-                    width: 88vw !important;
-                    height: auto !important;
-                    margin: 0 auto !important;
-                  }
-                }
-              `}</style>          
-        </div>
-      </motion.div>
-
-      <div className="chart-section" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+</motion.div>      <div className="chart-section" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
         <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>{conteudoSite.chart.titulo}</h2>
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={[
@@ -383,9 +293,77 @@ function Dashboard() {
           }}>
             {conteudoSite.economia.economiaMes} {formatCurrency(economiaMensalCorreta)}
           </span>
-        </p>
-        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>{conteudoSite.economia.economiaAno} {formatCurrency(economiaAnualCorreta)}</div>
+        </p>        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>{conteudoSite.economia.economiaAno} {formatCurrency(economiaAnualCorreta)}</div>
         <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>{conteudoSite.economia.descricao}</p>
+      </motion.div>
+
+      {/* Seção Belz Conecta Saúde + Proposta Belz - Movida para o final */}
+      <motion.div
+        className="section belz-conecta-saude super-destaque"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.7 }}
+        style={{
+          marginTop: 56,
+          borderLeft: '8px solid #1976d2',
+          boxShadow: '0 8px 48px 0 #01114755',
+          background: 'linear-gradient(120deg, #011147 65%, #1976d2 100%)',
+          color: '#fff',
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: 36,
+          padding: 0,
+          minHeight: 340,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 0,
+        }}
+      >
+        {/* Decoração de fundo com gradiente e formas */}
+        <div style={{ position: 'absolute', top: -60, right: -60, width: 320, height: 320, background: 'radial-gradient(circle at 80% 20%, #fff3, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
+        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, background: 'radial-gradient(circle at 10% 90%, #1976d2aa, transparent 80%)', zIndex: 0, filter: 'blur(2px)' }} />
+        {/* Coluna texto */}
+          <div style={{ flex: 1.5, padding: '54px 36px 54px 54px', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+            <img 
+            src={process.env.PUBLIC_URL + '/conectasaude.png?v=1'} 
+            alt="Logo Conecta Saúde" 
+            style={{ height: 'auto', width: 300, marginRight: 6, marginBottom: 30, borderRadius: 8, background: '', boxShadow: '0 2px 8px #01114733', objectFit: 'contain', maxWidth: '100%' ,'alignItems': 'center', 'justifyContent': 'center' }} 
+            onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />
+
+              <img 
+                src={process.env.PUBLIC_URL + '/proposta-belz.svg?v=1'} 
+                alt="Proposta Belz" 
+                className="proposta-belz-img"
+                style={{
+                  width: '100%',
+                  maxWidth: 1080,
+                  height: 'auto',
+                  borderRadius: 12,
+                  background: '',
+                  boxShadow: '0 2px 8px #01114733',
+                  objectFit: 'contain',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto',
+                  display: 'block',
+                }}
+                onError={e => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/belz-logo.png'; }}
+              />
+              <style>{`
+                @media (max-width: 600px) {
+                  .proposta-belz-img {
+                    max-width: 88vw !important;
+                    min-width: 0 !important;
+                    width: 88vw !important;
+                    height: auto !important;
+                    margin: 0 auto !important;
+                  }
+                }
+              `}</style>          
+        </div>
       </motion.div>
     </motion.div>
   );

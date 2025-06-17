@@ -69,13 +69,27 @@ function Saude({ saudeAtual, saudeNovo }) {
               BAIXAR HAPVIDA ATUAL
             </button>
           </div>
-        </Card>
-
-        <Card>
+        </Card>        <Card>
           <div className="card-title">📋 Proposta Belz</div>
           <div>Seguradora: <strong>Bradesco/Unimed</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-novo">{formatCurrency(saudeNovo)}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 16 }}>
+            <button
+              onClick={() => handleDownload('segurosaude-bradesco-belz.pdf')}
+              className="download-btn"
+              style={downloadBtnStyle}
+            >
+              BAIXAR PROPOSTA BRADESCO (BELZ)
+            </button>
+            <button
+              onClick={() => handleDownload('segurosaude-unimed-belz.pdf')}
+              className="download-btn"
+              style={downloadBtnStyle}
+            >
+              BAIXAR PROPOSTA UNIMED (BELZ)
+            </button>
+          </div>
           <div style={{ marginTop: 16 }}>
             <div>Economia mensal: <strong style={{ color: '#2ecc71' }}>{formatCurrency(saudeEconomia)}</strong></div>
             <div>Economia anual: <strong style={{ color: '#2ecc71' }}>{formatCurrency(saudeEconomia * 12)}</strong></div>
