@@ -47,7 +47,7 @@ function Saude({ saudeAtual, saudeNovo }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="section-title">Seguro Saúde Mensal</h2>
+      <h2 className="section-title">Seguro Saúde</h2>
       <div className="comparison-grid">
         <Card>
           <div className="card-title">📋 Situação Atual</div>

@@ -3,6 +3,8 @@ import Card from "./components/Card";
 import { motion } from "framer-motion";
 
 function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }) {
+  const vidaEconomia = vidaAtual - vidaNovo;
+
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
       style: "currency",
@@ -48,7 +50,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <h2 className="section-title">Seguro de Vida Anual </h2>
+      <h2 className="section-title">Seguro de Vida </h2>
       <div className="comparison-grid" style={{ alignItems: 'flex-start' }}>
         <Card>
           <p className="card-title">📋 Situação Atual</p>
@@ -61,9 +63,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
           >
             BAIXAR SEGURO ATUAL (ALFA)
           </button>
-        </Card>
-
-        <Card>
+        </Card>        <Card>
           <p className="card-title">📋 Proposta Belz</p>
           <div className="card-title">👥 70 Colaboradores</div>
           <div className="value-display value-novo" style={{ color: '#011147' }}>{formatCurrency(vidaNovo)}</div>
@@ -74,6 +74,9 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
           >
             BAIXAR SEGURO BELZ (SULAMÉRICA)
           </button>
+          <div style={{ marginTop: 16 }}>
+            <div>Economia anual: <strong style={{ color: '#2ecc71' }}>{formatCurrency(vidaEconomia)}</strong></div>
+          </div>
         </Card>
 
       </div>
@@ -97,9 +100,42 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
               <td>{formatCurrency(vidaAtual)}</td>
               <td>{formatCurrency(vidaUnitarioAtual)}</td>
             </tr>
-          </tbody>
-        </table>
+          </tbody>        </table>
       </motion.div>
+      
+      {/* Tabela Comparativa */}
+      <div style={{ marginTop: 30 }}>
+        <h3 style={{ fontSize: '1.4rem', marginBottom: 15, color: '#011147' }}>Comparativo Detalhado</h3>
+        <div className="table-responsive">
+          <table className="summary-table">
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Atual (Alfa)</th>
+                <th>Proposta (SulAmérica)</th>
+                <th>Economia</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Valor Anual</td>
+                <td>{formatCurrency(vidaAtual)}</td>
+                <td>{formatCurrency(vidaNovo)}</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(vidaEconomia)}</td>
+              </tr>
+              <tr>
+                <td>Valor por Colaborador</td>
+                <td>{formatCurrency(vidaUnitarioAtual)}</td>
+                <td>{formatCurrency(vidaNovo / 70)}</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(vidaUnitarioAtual - (vidaNovo / 70))}</td>
+              </tr>
+              <tr>
+                <td>*OBSERVAÇÃO: INCLUSÃO DE TELEMEDICINA</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </motion.div>
   );
 }
