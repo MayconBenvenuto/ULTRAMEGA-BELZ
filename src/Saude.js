@@ -90,10 +90,6 @@ function Saude({ saudeAtual, saudeNovo }) {
               BAIXAR PROPOSTA UNIMED (BELZ)
             </button>
           </div>
-          <div style={{ marginTop: 16 }}>
-            <div>Economia mensal: <strong style={{ color: '#2ecc71' }}>{formatCurrency(saudeEconomia)}</strong></div>
-            <div>Economia anual: <strong style={{ color: '#2ecc71' }}>{formatCurrency(saudeEconomia * 12)}</strong></div>
-          </div>
         </Card>
       </div>
       

@@ -74,63 +74,36 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
           >
             BAIXAR SEGURO BELZ (SULAMÉRICA)
           </button>
-          <div style={{ marginTop: 16 }}>
-            <div>Economia anual: <strong style={{ color: '#2ecc71' }}>{formatCurrency(vidaEconomia)}</strong></div>
-          </div>
         </Card>
 
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="table-responsive"
-      >
-        <table className="summary-table">
-          <thead>
-            <tr>
-              <th>Colaboradores</th>
-              <th>Valor Total</th>
-              <th>Valor Unitário</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{vidaColaboradoresAtual}</td>
-              <td>{formatCurrency(vidaAtual)}</td>
-              <td>{formatCurrency(vidaUnitarioAtual)}</td>
-            </tr>
-          </tbody>        </table>
-      </motion.div>
       
       {/* Tabela Comparativa */}
       <div style={{ marginTop: 30 }}>
         <h3 style={{ fontSize: '1.4rem', marginBottom: 15, color: '#011147' }}>Comparativo Detalhado</h3>
         <div className="table-responsive">
           <table className="summary-table">
-            <thead>
-              <tr>
+            <thead>              <tr>
                 <th>Categoria</th>
                 <th>Atual (Alfa)</th>
                 <th>Proposta (SulAmérica)</th>
-                <th>Economia</th>
+                <th>Investimento</th>
               </tr>
-            </thead>
-            <tbody>
+            </thead>            <tbody>
+              <tr>
+                <td>Valor Mensal</td>
+                <td>{formatCurrency(vidaAtual / 12)}</td>
+                <td>{formatCurrency(vidaNovo / 12)}</td>
+                <td style={{ color: '#006400', fontWeight: 'bold' }}>{formatCurrency(vidaEconomia / 12)}</td>
+              </tr>
               <tr>
                 <td>Valor Anual</td>
                 <td>{formatCurrency(vidaAtual)}</td>
                 <td>{formatCurrency(vidaNovo)}</td>
-                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(vidaEconomia)}</td>
+                <td style={{ color: '#006400', fontWeight: 'bold' }}>{formatCurrency(vidaEconomia)}</td>
               </tr>
               <tr>
-                <td>Valor por Colaborador</td>
-                <td>{formatCurrency(vidaUnitarioAtual)}</td>
-                <td>{formatCurrency(vidaNovo / 70)}</td>
-                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(vidaUnitarioAtual - (vidaNovo / 70))}</td>
-              </tr>
-              <tr>
-                <td>*OBSERVAÇÃO: INCLUSÃO DE TELEMEDICINA</td>
+                <td><strong>*OBSERVAÇÃO: INCLUSÃO DE TELEMEDICINA</strong></td>
               </tr>
             </tbody>
           </table>

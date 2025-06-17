@@ -87,10 +87,15 @@ function SeguroEmpresarial({ empresarialAtual, empresarialNovo }) {
                 <th>Proposta Belz</th>
                 <th>Economia</th>
               </tr>
-            </thead>
-            <tbody>
+            </thead>            <tbody>
               <tr>
-                <td>Seguro Empresarial</td>
+                <td>Valor Mensal</td>
+                <td>{formatCurrency(empresarialAtual / 12)}</td>
+                <td>{formatCurrency(empresarialNovo / 12)}</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(empresarialEconomia / 12)}</td>
+              </tr>
+              <tr>
+                <td>Valor Anual</td>
                 <td>{formatCurrency(empresarialAtual)}</td>
                 <td>{formatCurrency(empresarialNovo)}</td>
                 <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(empresarialEconomia)}</td>

@@ -89,24 +89,6 @@ function Frota({ frotaAtual, tokioValor, allianzValor }) {
         </Card>
       </div>
 
-      <motion.div 
-        className={frotaEconomia > 0 ? "difference" : "difference negative"}
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        Economia anual de: {formatCurrency(frotaEconomia)}
-      </motion.div>
-
-      <motion.div 
-        className={frotaEconomia > 0 ? "difference" : "difference negative"}
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        Economia mensal de: {formatCurrency(frotaEconomia / 12)}
-      </motion.div>
-
       {/* Tabela Comparativa */}
       <div style={{ marginTop: 30 }}>
         <h3 style={{ fontSize: '1.4rem', marginBottom: 15, color: '#011147' }}>Comparativo Detalhado</h3>
@@ -127,17 +109,17 @@ function Frota({ frotaAtual, tokioValor, allianzValor }) {
                 <td>{formatCurrency(frotaAtual / 12)}</td>
                 <td style={{ color: '#e74c3c', fontWeight: 'bold' }}>Atual</td>
               </tr>
-              <tr>
+              <tr style={{ color: '#011147', fontWeight: 'bold' }}>
                 <td>Tokio (Belz)</td>
                 <td>{formatCurrency(tokioValor)}</td>
                 <td>{formatCurrency(tokioValor / 12)}</td>
-                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>Proposta</td>
+                <td style={{ color: '#011147', fontWeight: 'bold' }}>Proposta Belz</td>
               </tr>
-              <tr>
+              <tr style={{ color: '#011147', fontWeight: 'bold' }}>
                 <td>Allianz (Belz)</td>
                 <td>{formatCurrency(allianzValor)}</td>
                 <td>{formatCurrency(allianzValor / 12)}</td>
-                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>Proposta</td>
+                <td style={{ color: '#011147', fontWeight: 'bold' }}>Proposta Belz</td>
               </tr>
               <tr style={{ backgroundColor: '#f8f9fa', fontWeight: 'bold' }}>
                 <td>Total Belz</td>
