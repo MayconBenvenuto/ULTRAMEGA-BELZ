@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import Saude from "./Saude";
 import Frota from "./Frota";
 import Vida from "./Vida";
 import SeguroEmpresarial from "./SeguroEmpresarial";
-import { useTheme } from "./ThemeContext";
 import conteudoSite from "./configConteudo";
 
-function Dashboard() {
-  const [loading, setLoading] = useState(true);
-  const { isDark } = useTheme();
+function Dashboard() {  const [loading, setLoading] = useState(true);
+
+  // ========== RESUMO DOS CÁLCULOS ==========
+  // VALORES BASE:
+  // - Saúde: valores mensais (R$ 61.280,09 atual vs R$ 47.454,61 proposta)
+  // - Frota: valores anuais (R$ 260.049,96 atual vs R$ 222.307,74 proposta) 
+  // - Vida: valores anuais (R$ 668 atual vs R$ 1.763,37 proposta)
+  // - Empresarial: valores anuais (R$ 102.743,55 atual vs R$ 60.000,00 proposta)
+  // - Belz Conecta Saúde: R$ 15.000,00 mensais (R$ 180.000,00 anuais)
+  //
+  // DUAS ECONOMIAS CALCULADAS:
+  // 1. Primeira seção: Economia SEM Belz Conecta Saúde (comparação pura dos seguros)
+  // 2. Seção final: Economia COM Belz Conecta Saúde (economia líquida real)
+  // ===========================================
 
   // Centralização dos valores principais
   // Saúde
@@ -33,26 +42,24 @@ function Dashboard() {
 
   // Custos extras
   const ouvidoria = 1300.00;
-  const ginasticaLaboral = 2500.00;  // Custos totais atuais
-  // Corrigido: frotaAtual é anual, então para o custo mensal usamos frotaAtual / 12
-  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + (frotaAtual / 12) + vidaAtual + (empresarialAtual / 12);
-  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual + vidaAtual * 12 + empresarialAtual;
+  const ginasticaLaboral = 2500.00;  // Custos totais atuais  // Corrigido: para custos mensais, vida deve ser dividido por 12
+  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + (frotaAtual / 12) + (vidaAtual / 12) + (empresarialAtual / 12);
+  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual + vidaAtual + empresarialAtual;
   // Belz Conecta Saúde
-  const belzConectaSaude = 14976.00; // valor anual
-
-  // Custos totais proposta Belz
-  const custoMensalBelz = saudeNovo + (frotaNovo / 12) + vidaNovo + (empresarialNovo / 12);
-  const custoTotalBelzAno = saudeNovo * 12 + frotaNovo + vidaNovo * 12 + empresarialNovo;
-
-  // Economia
-  // Agora inclui Belz Conecta Saúde como custo adicional na proposta Belz
-  // economia anual = (saudeAtual - saudeNovo)*12 + (frotaAtual - frotaNovo) + (vidaAtual - vidaNovo)*12 + (empresarialAtual - empresarialNovo) - belzConectaSaude
-  const economiaSaudeAnual = (saudeAtual - saudeNovo) * 12;
-  const economiaFrotaAnual = frotaAtual - frotaNovo;
-  const economiaVidaAnual = (vidaAtual - vidaNovo) * 12;
-  const economiaEmpresarialAnual = empresarialAtual - empresarialNovo;
-  const economiaAnualCorreta = economiaSaudeAnual + economiaFrotaAnual + economiaVidaAnual + economiaEmpresarialAnual - belzConectaSaude;
-  const economiaMensalCorreta = economiaAnualCorreta / 12;
+  const belzConectaSaude = 15000.00; // valor MENSAL
+  // Custos totais proposta Belz (corrigido)
+  const custoMensalBelz = saudeNovo + (frotaNovo / 12) + (vidaNovo / 12) + (empresarialNovo / 12);
+  const custoTotalBelzAno = saudeNovo * 12 + frotaNovo + vidaNovo + empresarialNovo;  //    
+  // Cálculo da economia usando os valores corretos fornecidos
+  // Custo mensal atual: R$ 95.368,55 (incluindo ouvidoria e ginástica)
+  // Custo mensal proposta Belz: R$ 71.127,20 (sem ouvidoria e ginástica)
+  const economiaAnualCorreta = 24241.35 * 12; // R$ 290.896,20
+  const economiaMensalCorreta = 24241.35;
+  
+  // Cálculo da economia COM Belz Conecta Saúde (para a seção final - CONSULTORIA)
+  // Subtrai o custo do Belz Conecta Saúde da economia
+  const economiaAnualFinal = economiaAnualCorreta - (belzConectaSaude * 12);
+  const economiaMensalFinal = economiaAnualFinal / 12;
 
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
@@ -136,7 +143,7 @@ function Dashboard() {
         { label: conteudoSite.custos.ginastica, valor: ginasticaLaboral, icon: '💪', color: '#1976d2' },
         { label: conteudoSite.custos.saude, valor: saudeAtual, icon: '⚕️', color: '#1976d2' },
         { label: conteudoSite.custos.frota, valor: frotaAtual / 12, icon: '🚙', color: '#1976d2' },
-        { label: conteudoSite.custos.vida, valor: vidaAtual, icon: '🛡️', color: '#1976d2' },
+        { label: conteudoSite.custos.vida, valor: vidaAtual / 12, icon: '🛡️', color: '#1976d2' },
         { label: 'Empresarial', valor: empresarialAtual / 12, icon: '🏢', color: '#1976d2' }
       ].map((item, index) => (
         <motion.div
@@ -277,7 +284,7 @@ function Dashboard() {
     }}>      {[ 
         { label: conteudoSite.custos.saude, valor: saudeNovo, icon: '⚕️', color: '#1976d2' },
         { label: conteudoSite.custos.frota, valor: frotaNovo / 12, icon: '🚙', color: '#1976d2' },
-        { label: conteudoSite.custos.vida, valor: vidaNovo, icon: '🛡️', color: '#1976d2' },
+        { label: conteudoSite.custos.vida, valor: vidaNovo / 12, icon: '🛡️', color: '#1976d2' },
         { label: 'Empresarial', valor: empresarialNovo / 12, icon: '🏢', color: '#1976d2' }
       ].map((item, index) => (
         <motion.div
@@ -383,66 +390,92 @@ function Dashboard() {
       </motion.div>
     </div>
   </div>
-</motion.div><div className="chart-section" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
-        <h2 className="section-title" style={{ textAlign: 'center', width: '100%' }}>{conteudoSite.chart.titulo}</h2>
-        <ResponsiveContainer width="100%" height={400}>          <BarChart data={[
-            { name: "Saúde", atual: saudeAtual * 12, novo: saudeNovo * 12 },
-            { name: "Frota", atual: 260049.96, novo: 222307.68 },
-            { name: "Vida", atual: 668 * 12, novo: 1763.37 * 12 },
-            { name: "Empresarial", atual: empresarialAtual, novo: empresarialNovo },
-            { name: "Belz Conecta Saúde", atual: 0, novo: 14976.00 },
-          ]} barCategoryGap={30} barGap={8}>
-            <XAxis dataKey="name" stroke={isDark ? "#fff" : "#011147"} />
-            <YAxis stroke={isDark ? "#fff" : "#011147"} />
-            <Tooltip
-              formatter={(value, key, item) => [formatCurrency(value), item && item.payload && item.dataKey === 'atual' ? 'Valor Atual' : 'Valor Belz']}
-              labelFormatter={label => `Categoria: ${label}`}
-              contentStyle={{
-                background: isDark ? "#2d3436" : "#fff",
-                border: "none",
-                borderRadius: "8px",
-                color: isDark ? "#fff" : "#011147",
-              }}
-              itemSorter={item => item.dataKey === 'atual' ? 1 : 0}
-            />
-            <Legend payload={[
-              { value: 'Valor Atual', type: 'rect', color: 'red', id: 'atual' },
-              { value: 'Valor Belz', type: 'rect', color: '#011147', id: 'novo' }
-            ]} wrapperStyle={{ fontSize: '1.1rem' }} />
-            <Bar dataKey="atual" fill="red" name="Valor Atual" maxBarSize={60} minPointSize={0} isAnimationActive={false} />
-            <Bar dataKey="novo" fill="#011147" name="Valor Belz" maxBarSize={90} minPointSize={50} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      <motion.div
+</motion.div>      {/* Seção Economia Custos - Design Elegante Azul Claro */}
+        <motion.div
         className="total-savings"
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', width: '100%' }}
+        style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          textAlign: 'center', 
+          width: '100%',
+          padding: '40px 20px',
+          background: 'linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%)',
+          borderRadius: 24,
+          boxShadow: '0 8px 32px #01114722'
+        }}
       >
-        <h2 style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>{conteudoSite.economia.titulo}</h2>
-        <p style={{ fontSize: '1.2rem', marginTop: 10, textAlign: 'center' }}>
-          <span style={{
-            display: 'inline-block',
-            background: '#011147',
-            color: '#fff',
-            fontWeight: 900,
-            fontSize: '2.25rem',
-            padding: '10px 24px',
-            borderRadius: 10,
-            boxShadow: '0 2px 12px #e74c3c22',
-            letterSpacing: 0.5,
-            border: '2px solid #011147',
-            textAlign: 'center',
-            width: '100%',
-            maxWidth: 420
+        <h2 style={{ 
+          color: '#011147', 
+          textAlign: 'center', 
+          width: '100%', 
+          fontSize: '2.2rem', 
+          fontWeight: 800, 
+          marginBottom: 24,
+          textShadow: '0 2px 8px #01114722'
+        }}>
+          💰 Economia Total Estimada
+        </h2>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          gap: 40, 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          marginBottom: 20
+        }}>          <div style={{
+            background: '#fff',
+            padding: '24px 32px',
+            borderRadius: 16,
+            boxShadow: '0 4px 16px #01114711',
+            border: '2px solid #e3f2fd',
+            minWidth: '300px'
           }}>
-            {conteudoSite.economia.economiaMes} {formatCurrency(economiaMensalCorreta)}
-          </span>
-        </p>        <div className="amount" style={{ color: '#011147', fontSize: '2.8rem', marginTop: 18, textAlign: 'center', width: '100%' }}>{conteudoSite.economia.economiaAno} {formatCurrency(economiaAnualCorreta)}</div>
-        <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>{conteudoSite.economia.descricao}</p>
+            <div style={{ fontSize: '1.1rem', color: '#666', marginBottom: 8, fontWeight: 600 }}>por MÊS:</div>
+            <div style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 900, 
+              color: '#011147',
+              textShadow: '0 2px 8px #01114722'
+            }}>
+              {formatCurrency(economiaMensalCorreta)}
+            </div>
+          </div>
+          
+          <div style={{
+            background: '#fff',
+            padding: '24px 32px',
+            borderRadius: 16,
+            boxShadow: '0 4px 16px #01114711',
+            border: '2px solid #e3f2fd',
+            minWidth: '300px'
+          }}>
+            <div style={{ fontSize: '1.1rem', color: '#666', marginBottom: 8, fontWeight: 600 }}>por ANO:</div>
+            <div style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 900, 
+              color: '#011147',
+              textShadow: '0 2px 8px #01114722'
+            }}>
+              {formatCurrency(economiaAnualCorreta)}
+            </div>
+          </div>
+        </div>
+          <p style={{ 
+          fontSize: '1.2rem', 
+          color: '#666', 
+          textAlign: 'center',
+          maxWidth: 600,
+          lineHeight: 1.6,
+          fontWeight: 500
+        }}>
+          Esta economia considera todos os custos atuais e a proposta Belz, sem incluir o Belz Conecta Saúde. A economia líquida real será apresentada na seção final.
+        </p>
       </motion.div>
 
       {/* Seção Belz Conecta Saúde + Proposta Belz - Movida para o final */}
@@ -508,10 +541,192 @@ function Dashboard() {
                     margin: 0 auto !important;
                   }
                 }
-              `}</style>          
+              `}</style>            </div>
+      </motion.div>
+
+      {/* Seção Economia Total Final */}      
+      
+      <motion.div
+        className="total-savings"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+        style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          textAlign: 'center', 
+          width: '100%',
+          padding: '40px 20px',
+          background: 'linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%)',
+          borderRadius: 24,
+          boxShadow: '0 8px 32px #01114722'
+        }}
+      >
+        <h2 style={{ 
+          color: '#011147', 
+          textAlign: 'center', 
+          width: '100%', 
+          fontSize: '2.2rem', 
+          fontWeight: 800, 
+          marginBottom: 24,
+          textShadow: '0 2px 8px #01114722'
+        }}>
+          {conteudoSite.economia.titulo}
+        </h2>        
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          gap: 40, 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          marginBottom: 20
+        }}>
+          <div style={{
+            background: '#fff',
+            padding: '24px 32px',
+            borderRadius: 16,
+            boxShadow: '0 4px 16px #01114711',
+            border: '2px solid #e3f2fd',
+            minWidth: '300px'
+          }}>
+            <div style={{ fontSize: '1.1rem', color: '#666', marginBottom: 8, fontWeight: 600 }}>por MÊS:</div>
+            <div style={{ 
+              fontSize: '1.4rem', 
+              fontWeight: 600, 
+              color: '#011147',
+              textShadow: '0 2px 8px #01114722',
+              marginBottom: 8
+            }}>
+              {formatCurrency(economiaMensalCorreta)} - {formatCurrency(belzConectaSaude)} = {formatCurrency(economiaMensalFinal)}
+            </div>
+            <div style={{ fontSize: '0.9rem', color: '#888' }}>
+              com Belz Conecta Saúde
+            </div>
+          </div>
+          
+          <div style={{
+            background: '#fff',
+            padding: '24px 32px',
+            borderRadius: 16,
+            boxShadow: '0 4px 16px #01114711',
+            border: '2px solid #e3f2fd',
+            minWidth: '300px'
+          }}>
+            <div style={{ fontSize: '1.1rem', color: '#666', marginBottom: 8, fontWeight: 600 }}>por ANO:</div>
+            <div style={{ 
+              fontSize: '1.4rem', 
+              fontWeight: 600, 
+              color: '#011147',
+              textShadow: '0 2px 8px #01114722',
+              marginBottom: 8
+            }}>
+              {formatCurrency(economiaAnualCorreta)} - {formatCurrency(belzConectaSaude * 12)} = {formatCurrency(economiaAnualFinal)}
+            </div>
+            <div style={{ fontSize: '0.9rem', color: '#888' }}>
+              com Belz Conecta Saúde
+            </div>
+          </div>
         </div>
+        
+        <p style={{ color: '#1a237e', textAlign: 'center', width: '100%' }}>{conteudoSite.economia.descricao}</p>
+      </motion.div>
+
+
+      <motion.div
+        className="total-savings-final"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+        style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          textAlign: 'center', 
+          width: '100%',
+          marginTop: 40,
+          padding: '40px 20px',
+          background: 'linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%)',
+          borderRadius: 24,
+          boxShadow: '0 8px 32px #01114722'
+        }}
+      >
+        <h2 style={{ 
+          color: '#011147', 
+          textAlign: 'center', 
+          width: '100%', 
+          fontSize: '2.2rem', 
+          fontWeight: 800, 
+          marginBottom: 24,
+          textShadow: '0 2px 8px #01114722'
+        }}>
+           Economia Total COM a CONSULTORIA e a BELZ CONECTA SAÚDE!
+        </h2>
+        
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          gap: 40, 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          marginBottom: 20
+        }}>
+          <div style={{
+            background: '#fff',
+            padding: '24px 32px',
+            borderRadius: 16,
+            boxShadow: '0 4px 16px #01114711',
+            border: '2px solid #e3f2fd'
+          }}>
+            <div style={{ fontSize: '1.1rem', color: '#666', marginBottom: 8, fontWeight: 600 }}>por MÊS:</div>            <div style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 900, 
+              color: '#011147',
+              textShadow: '0 2px 8px #01114722'
+            }}>
+              R$ {economiaMensalFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+            </div>
+          </div>
+          
+          <div style={{
+            background: '#fff',
+            padding: '24px 32px',
+            borderRadius: 16,
+            boxShadow: '0 4px 16px #01114711',
+            border: '2px solid #e3f2fd'
+          }}>
+            <div style={{ fontSize: '1.1rem', color: '#666', marginBottom: 8, fontWeight: 600 }}>por ANO:</div>            <div style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 900, 
+              color: '#011147',
+              textShadow: '0 2px 8px #01114722'
+            }}>
+              R$ {economiaAnualFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+            </div>
+          </div>
+        </div>
+        
+        <p style={{ 
+          fontSize: '1.2rem', 
+          color: '#666', 
+          textAlign: 'center',
+          maxWidth: 600,
+          lineHeight: 1.6,
+          fontWeight: 500
+        }}>
+          Valor economizado anualmente com as propostas da Belz Corretora
+          <br />          <span style={{ fontSize: '1rem', color: '#888' }}>
+            (Inclui investimento de R$ 15.000,00 mensais no Belz Conecta Saúde)
+          </span>
+        </p>
       </motion.div>
     </motion.div>
+
+    
   );
 }
 

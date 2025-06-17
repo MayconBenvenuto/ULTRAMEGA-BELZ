@@ -21,7 +21,7 @@ const conteudoSite = {
     titulo: "📊 Comparativo de Valores Anual"
   },
   economia: {
-    titulo: "💰 Economia Total Estimada",
+    titulo: " Economia Total Estimada",
     economiaMes: " por MÊS:",
     economiaAno: " por ANO:",
     descricao: "Valor economizado anualmente com as propostas da Belz Corretora"

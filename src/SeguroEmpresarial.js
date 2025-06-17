@@ -51,7 +51,7 @@ function SeguroEmpresarial({ empresarialAtual, empresarialNovo }) {
       <h2 className="section-title">Seguro Empresarial</h2>
       <div className="comparison-grid">        <Card>
           <div className="card-title">🏢 Situação Atual</div>
-          <div>Seguradora: <strong>Atual</strong></div>
+          <div>Seguradora: <strong>Porto Seguro</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-atual">{formatCurrency(empresarialAtual)}</div>
           <button
@@ -65,7 +65,7 @@ function SeguroEmpresarial({ empresarialAtual, empresarialNovo }) {
 
         <Card>
           <div className="card-title">🏢 Proposta Belz</div>
-          <div>Seguradora: <strong>Nova Proposta</strong></div>
+          <div>Seguradora: <strong>a definir</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-novo">{formatCurrency(empresarialNovo)} - <span style={{ color: '#ff0000' }}>ESTIMADA</span></div>
           {/* Botão será adicionado quando os arquivos estiverem prontos */}

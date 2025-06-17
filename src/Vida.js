@@ -89,7 +89,9 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
                 <th>Proposta (SulAmérica)</th>
                 <th>Investimento</th>
               </tr>
-            </thead>            <tbody>
+            </thead>            
+            
+            <tbody>
               <tr>
                 <td>Valor Mensal</td>
                 <td>{formatCurrency(vidaAtual / 12)}</td>

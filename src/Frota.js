@@ -4,11 +4,12 @@ import Card from "./components/Card";
 function Frota({ frotaAtual, tokioValor, allianzValor }) {
   const frotaNovo = tokioValor + allianzValor;
   const frotaEconomia = frotaAtual - frotaNovo;
-
   function formatCurrency(value) {
     return value.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     });
   }
 
@@ -93,41 +94,33 @@ function Frota({ frotaAtual, tokioValor, allianzValor }) {
       <div style={{ marginTop: 30 }}>
         <h3 style={{ fontSize: '1.4rem', marginBottom: 15, color: '#011147' }}>Comparativo Detalhado</h3>
         <div className="table-responsive">
-          <table className="summary-table">
-            <thead>
+          <table className="summary-table">            <thead>
               <tr>
                 <th>Seguradora</th>
                 <th>Valor Anual</th>
                 <th>Valor Mensal</th>
                 <th>Status</th>
+                <th>Economia Anual</th>
+                <th>Economia Mensal</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody>              
+              
               <tr>
                 <td>Bradesco (Atual)</td>
                 <td>{formatCurrency(frotaAtual)}</td>
                 <td>{formatCurrency(frotaAtual / 12)}</td>
                 <td style={{ color: '#e74c3c', fontWeight: 'bold' }}>Atual</td>
+                <td>-</td>
+                <td>-</td>
               </tr>
-              <tr style={{ color: '#011147', fontWeight: 'bold' }}>
-                <td>Tokio (Belz)</td>
-                <td>{formatCurrency(tokioValor)}</td>
-                <td>{formatCurrency(tokioValor / 12)}</td>
-                <td style={{ color: '#011147', fontWeight: 'bold' }}>Proposta Belz</td>
-              </tr>
-              <tr style={{ color: '#011147', fontWeight: 'bold' }}>
-                <td>Allianz (Belz)</td>
-                <td>{formatCurrency(allianzValor)}</td>
-                <td>{formatCurrency(allianzValor / 12)}</td>
-                <td style={{ color: '#011147', fontWeight: 'bold' }}>Proposta Belz</td>
-              </tr>
-              <tr style={{ backgroundColor: '#f8f9fa', fontWeight: 'bold' }}>
+              <tr style={{fontWeight: 'bold' }}>
                 <td>Total Belz</td>
                 <td>{formatCurrency(frotaNovo)}</td>
                 <td>{formatCurrency(frotaNovo / 12)}</td>
-                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>
-                  Economia: {formatCurrency(frotaEconomia)}
-                </td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>Proposta Total</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(frotaEconomia)}</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(frotaEconomia / 12)}</td>
               </tr>
             </tbody>
           </table>
