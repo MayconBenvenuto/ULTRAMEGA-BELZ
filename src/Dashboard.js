@@ -35,8 +35,8 @@ function Dashboard() {
   const ouvidoria = 1300.00;
   const ginasticaLaboral = 2500.00;  // Custos totais atuais
   // Corrigido: frotaAtual é anual, então para o custo mensal usamos frotaAtual / 12
-  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + (frotaAtual / 12) + vidaAtual;
-  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual + vidaAtual * 12;
+  const custoMensalAtual = ouvidoria + ginasticaLaboral + saudeAtual + (frotaAtual / 12) + vidaAtual + (empresarialAtual / 12);
+  const custoTotalAtualAno = ouvidoria * 12 + ginasticaLaboral * 12 + saudeAtual * 12 + frotaAtual + vidaAtual * 12 + empresarialAtual;
   // Belz Conecta Saúde
   const belzConectaSaude = 14976.00; // valor anual
 
@@ -131,13 +131,13 @@ function Dashboard() {
       gap: 32,
       justifyContent: 'center',
       marginBottom: 40,
-    }}>
-      {[ 
+    }}>      {[ 
         { label: conteudoSite.custos.ouvidoria, valor: ouvidoria, icon: '🎧', color: '#1976d2' },
         { label: conteudoSite.custos.ginastica, valor: ginasticaLaboral, icon: '💪', color: '#1976d2' },
         { label: conteudoSite.custos.saude, valor: saudeAtual, icon: '⚕️', color: '#1976d2' },
         { label: conteudoSite.custos.frota, valor: frotaAtual / 12, icon: '🚙', color: '#1976d2' },
-        { label: conteudoSite.custos.vida, valor: vidaAtual, icon: '🛡️', color: '#1976d2' }
+        { label: conteudoSite.custos.vida, valor: vidaAtual, icon: '🛡️', color: '#1976d2' },
+        { label: 'Empresarial', valor: empresarialAtual / 12, icon: '🏢', color: '#1976d2' }
       ].map((item, index) => (
         <motion.div
           className="ultramega-custo-card"
