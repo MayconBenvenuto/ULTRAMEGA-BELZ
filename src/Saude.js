@@ -12,6 +12,34 @@ function Saude({ saudeAtual, saudeNovo }) {
     });
   }
 
+  // Função para lidar com downloads
+  const handleDownload = (fileName) => {
+    const link = document.createElement('a');
+    link.href = `${process.env.PUBLIC_URL}/arquivos/${fileName}`;
+    link.download = fileName;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadBtnStyle = {
+    display: 'inline-block',
+    padding: '12px 24px',
+    background: '#1976d2',
+    color: '#fff',
+    borderRadius: 8,
+    fontWeight: 700,
+    textDecoration: 'none',
+    boxShadow: '0 2px 8px #01114733',
+    transition: 'background 0.2s',
+    textAlign: 'center',
+    cursor: 'pointer',
+    border: 'none',
+    width: '100%',
+  };
+
   return (
     <motion.div 
       className="section saude"
@@ -26,112 +54,65 @@ function Saude({ saudeAtual, saudeNovo }) {
           <div>Seguradora: <strong>SulAmérica/Hapvida</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-atual">{formatCurrency(saudeAtual)}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 16 }}>
-            <a
-              href="/arquivos/sulamerica.pdf"
-              download
-              target="_blank"
-              rel="noopener noreferrer"
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 16 }}>            <button
+              onClick={() => handleDownload('sulamerica-atual.pdf')}
               className="download-btn"
-              style={{
-                display: 'inline-block',
-                padding: '12px 24px',
-                background: '#1976d2',
-                color: '#fff',
-                borderRadius: 8,
-                fontWeight: 700,
-                textDecoration: 'none',
-                boxShadow: '0 2px 8px #01114733',
-                transition: 'background 0.2s',
-                textAlign: 'center',
-              }}
+              style={downloadBtnStyle}
             >
-              BAIXAR SULAMÉRICA (PDF)
-            </a>
-            <a
-              href="/arquivos/hapvida.pdf"
-              download
-              target="_blank"
-              rel="noopener noreferrer"
+              BAIXAR SULAMÉRICA ATUAL
+            </button>
+            <button
+              onClick={() => handleDownload('hapvida-atual.pdf')}
               className="download-btn"
-              style={{
-                display: 'inline-block',
-                padding: '12px 24px',
-                background: '#1976d2',
-                color: '#fff',
-                borderRadius: 8,
-                fontWeight: 700,
-                textDecoration: 'none',
-                boxShadow: '0 2px 8px #01114733',
-                transition: 'background 0.2s',
-                textAlign: 'center',
-              }}
+              style={downloadBtnStyle}
             >
-              BAIXAR HAPVIDA (PDF)
-            </a>
+              BAIXAR HAPVIDA ATUAL
+            </button>
           </div>
         </Card>
+
         <Card>
-          <div className="card-title">✨Com A Nova Proposta <strong>Belz</strong></div>
+          <div className="card-title">📋 Proposta Belz</div>
           <div>Seguradora: <strong>Bradesco/Unimed</strong></div>
           <div>Apólice:</div>
           <div className="value-display value-novo">{formatCurrency(saudeNovo)}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 16 }}>
-            <button
-              style={{
-                display: 'inline-block',
-                padding: '12px 24px',
-                background: '#011147',
-                color: '#fff',
-                borderRadius: 8,
-                fontWeight: 700,
-                textDecoration: 'none',
-                boxShadow: '0 2px 8px #01114733',
-                transition: 'background 0.2s',
-                textAlign: 'center',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '1.2rem',
-                opacity: 1,
-              }}
-              tabIndex={0}
-              aria-disabled="true"
-            >
-              BAIXAR PROPOSTA BELZ (BRADESCO)
-            </button>
-            <button
-              style={{
-                display: 'inline-block',
-                padding: '12px 24px',
-                background: '#011147',
-                color: '#fff',
-                borderRadius: 8,
-                fontWeight: 700,
-                textDecoration: 'none',
-                boxShadow: '0 2px 8px #01114733',
-                transition: 'background 0.2s',
-                textAlign: 'center',
-                border: 'none',
-                fontSize: '1.2rem',
-                cursor: 'pointer',
-                opacity: 1,
-              }}
-              tabIndex={0}
-              aria-disabled="true"
-            >
-              BAIXAR PROPOSTA BELZ (UNIMED)
-            </button>
+          <div style={{ marginTop: 16 }}>
+            <div>Economia mensal: <strong style={{ color: '#2ecc71' }}>{formatCurrency(saudeEconomia)}</strong></div>
+            <div>Economia anual: <strong style={{ color: '#2ecc71' }}>{formatCurrency(saudeEconomia * 12)}</strong></div>
           </div>
         </Card>
       </div>
-      <motion.div 
-        className={saudeEconomia > 0 ? "difference" : "difference negative"}
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        Economia: {formatCurrency(saudeEconomia)}
-      </motion.div>
+      
+      {/* Tabela Comparativa */}
+      <div style={{ marginTop: 30 }}>
+        <h3 style={{ fontSize: '1.4rem', marginBottom: 15, color: '#011147' }}>Comparativo Detalhado</h3>
+        <div className="table-responsive">
+          <table className="summary-table">
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Atual (SulAmérica/Hapvida)</th>
+                <th>Proposta (Bradesco/Unimed)</th>
+                <th>Economia</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Valor Mensal</td>
+                <td>{formatCurrency(saudeAtual)}</td>
+                <td>{formatCurrency(saudeNovo)}</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(saudeEconomia)}</td>
+              </tr>
+              <tr>
+                <td>Valor Anual</td>
+                <td>{formatCurrency(saudeAtual * 12)}</td>
+                <td>{formatCurrency(saudeNovo * 12)}</td>
+                <td style={{ color: '#2ecc71', fontWeight: 'bold' }}>{formatCurrency(saudeEconomia * 12)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </motion.div>
   );
 }
