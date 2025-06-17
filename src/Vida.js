@@ -10,6 +10,23 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
     });
   }
 
+  // Estilo de botão com ajustes responsivos
+  const downloadBtnStyle = {
+    display: 'inline-block',
+    padding: '12px 24px',
+    background: '#1976d2',
+    color: '#fff',
+    borderRadius: 8,
+    fontWeight: 700,
+    textDecoration: 'none',
+    boxShadow: '0 2px 8px #01114733',
+    marginTop: 16,
+    transition: 'background 0.2s',
+    textAlign: 'center',
+    width: 'auto',
+    maxWidth: '100%',
+  };
+
   return (
     <motion.div 
       className="section vida"
@@ -30,19 +47,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
             target="_blank"
             rel="noopener noreferrer"
             className="download-btn"
-            style={{
-              display: 'inline-block',
-              padding: '12px 24px',
-              background: '#1976d2',
-              color: '#fff',
-              borderRadius: 8,
-              fontWeight: 700,
-              textDecoration: 'none',
-              boxShadow: '0 2px 8px #01114733',
-              marginTop: 16,
-              transition: 'background 0.2s',
-              textAlign: 'center',
-            }}
+            style={downloadBtnStyle}
           >
             BAIXAR SEGURO ALFA 
           </a>
@@ -59,19 +64,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
             target="_blank"
             rel="noopener noreferrer"
             className="download-btn"
-            style={{
-              display: 'inline-block',
-              padding: '12px 24px',
-              background: '#1976d2',
-              color: '#fff',
-              borderRadius: 8,
-              fontWeight: 700,
-              textDecoration: 'none',
-              boxShadow: '0 2px 8px #01114733',
-              marginTop: 16,
-              transition: 'background 0.2s',
-              textAlign: 'center',
-            }}
+            style={downloadBtnStyle}
           >
             BAIXAR SEGURO SULAMÉRICA
           </a>
@@ -82,6 +75,7 @@ function Vida({ vidaAtual, vidaColaboradoresAtual, vidaUnitarioAtual, vidaNovo }
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
+        className="table-responsive"
       >
         <table className="summary-table">
           <thead>

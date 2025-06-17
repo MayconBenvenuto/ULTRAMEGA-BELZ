@@ -577,22 +577,184 @@ body {
   color: #81d4fa;
 }
 
-/* Responsive adjustments for .proposta-belz-img (already in style tag, moved here) */
-@media (max-width: 600px) {
-  .belz-proposta-image { /* Was .proposta-belz-img */
-    max-width: 88vw !important;
-    min-width: 0 !important;
-    width: 88vw !important;
-    height: auto !important;
-    margin: 0 auto !important;
-  }
+/* Estilos para tabelas responsivas */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
 
-  .ultramega-custos-totals-grid {
-    grid-template-columns: 1fr; /* Stack totals on smaller screens */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.summary-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.dark-theme .summary-table th {
+  background-color: #333;
+  color: #fff;
+  border-bottom: 1px solid #444;
+}
+
+.dark-theme .summary-table td {
+  border-bottom: 1px solid #444;
+}
+
+/* Regras de responsividade melhoradas para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajustes gerais de layout */
+  .container {
+    padding: 12px;
   }
-  .ultramega-custos-multiplier {
-    transform: rotate(90deg); /* Optional: make multiplier vertical */
-    margin: 10px auto;
+  
+  .section {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajustes do cabeçalho */
+  .header {
+    flex-direction: column;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .header-logo {
+    width: 100px;
+  }
+  
+  .header-center {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .header-center h1 {
+    font-size: 1.4rem;
+  }
+  
+  .header-center p {
+    font-size: 0.9rem;
+  }
+  
+  /* Ajustes da seção Vida e Cards */
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .comparison-card {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .value-display {
+    font-size: 1.3rem;
+  }
+  
+  /* Ajustes de botões */
+  .download-btn {
+    padding: 10px 18px !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Ajustes seção custos */
+  .ultramega-custos-container {
+    padding: 25px 15px;
+    margin-top: 20px;
+  }
+  
+  .ultramega-custos-title {
+    font-size: 1.8rem;
+  }
+  
+  .ultramega-custos-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ultramega-custo-card {
+    padding: 20px 15px;
+  }
+  
+  .ultramega-custo-card-label {
+    font-size: 1.2rem;
+  }
+  
+  .ultramega-custo-card-value {
+    font-size: 1.6rem;
+  }
+  
+  /* Ajustes para tabelas */
+  .summary-table {
+    width: 100%;
+    font-size: 0.9rem;
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .summary-table th, 
+  .summary-table td {
+    padding: 8px;
+  }
+}
+
+/* Ajustes específicos para telas muito pequenas */
+@media (max-width: 480px) {
+  .ultramega-custos-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-title {
+    font-size: 0.9rem;
+  }
+  
+  .value-display {
+    font-size: 1.2rem;
+  }
+  
+  .ultramega-custo-card-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .vida-section-container {
+    padding: 24px 15px 20px 15px;
+    margin: 20px 0 15px 0;
+    border-radius: 20px;
   }
 }
 
